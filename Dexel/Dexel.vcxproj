@@ -128,11 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DexelTranspiler.cpp" />
+    <ClCompile Include="Lexer.cpp" />
+    <ClCompile Include="Token.cpp" />
+    <ClCompile Include="Transpiler.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DexelTranspiler.h" />
+    <ClInclude Include="Lexer.h" />
+    <ClInclude Include="Transpiler.h" />
+    <ClInclude Include="Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

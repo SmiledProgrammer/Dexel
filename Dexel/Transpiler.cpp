@@ -1,9 +1,11 @@
-#include "DexelTranspiler.h"
+#include "Transpiler.h"
 
 #include <iostream>
 #include <string>
 
-int DexelTranspiler::parseArguments(int argc, char** argv) {
+using namespace dexel;
+
+int Transpiler::parseArguments(int argc, char** argv) {
 	int optionsCount = 0;
 	for (int i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "-native") == 0) {
@@ -19,7 +21,7 @@ int DexelTranspiler::parseArguments(int argc, char** argv) {
 					if (path.ends_with(".dexel")) {
 						m_sourceFile = path;
 					} else {
-						cerr << "Selected file is not a Dexel language file." << endl;
+						cerr << "Selected source file is not a Dexel language file." << endl;
 						return -1;
 					}
 				}
