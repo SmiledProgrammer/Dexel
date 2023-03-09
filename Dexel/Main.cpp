@@ -1,7 +1,9 @@
-#include "DexelTranspiler.h"
+#include "Transpiler.h"
+
+using namespace dexel;
 
 int main(int argc, char** argv) {
-	DexelTranspiler transpiler = DexelTranspiler();
+	Transpiler transpiler = Transpiler();
 	int result = transpiler.parseArguments(argc, argv);
 
 	return result;

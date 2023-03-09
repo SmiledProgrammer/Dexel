@@ -35,6 +35,10 @@ int Transpiler::parseArguments(int argc, char** argv) {
 		}
 		optionsCount++;
 	}
+	if (m_sourceFile == "") {
+		cerr << "Source file must be provided (\"-src\" option)." << endl;
+		return -1;
+	}
 	cout << "Loaded " << optionsCount << " transpilation options correctly." << endl;
 	return optionsCount;
 }
