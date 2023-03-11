@@ -134,7 +134,9 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LanguageConstants.h" />
     <ClInclude Include="Lexer.h" />
+    <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Transpiler.h" />
     <ClInclude Include="Token.h" />
   </ItemGroup>
