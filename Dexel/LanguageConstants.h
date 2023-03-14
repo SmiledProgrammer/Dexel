@@ -24,6 +24,7 @@ namespace dexel {
 	const map<string, Token::Type> DEXEL_KEYWORD_TOKENS{
 		{"function", Token::TYPE_FUNCTION_KEYWORD},
 		{"if", Token::TYPE_IF_KEYWORD},
+		{"else", Token::TYPE_ELSE_KEYWORD},
 		{"int", Token::TYPE_INT_KEYWORD}
 	};
 

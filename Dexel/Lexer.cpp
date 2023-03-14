@@ -68,7 +68,7 @@ void Lexer::processExpression() {
 	do {
 		expression += m_currentChar;
 		advance();
-	} while (isalnum(m_currentChar));
+	} while (isalnum(m_currentChar)); // TODO: reading selectors (@...) or conditions overall or just handling unknown characters/expressions
 	if (COMMAND_KEYWORDS.contains(expression)) {
 		processCommand(expression);
 	} else {
