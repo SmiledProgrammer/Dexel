@@ -109,6 +109,18 @@ namespace dexel {
 		"worldborder",
 		"xp"
 	};
+
+	const set<string> CONDITION_KEYWORDS{
+		"biome",
+		"block",
+		"blocks",
+		"data",
+		"dimension",
+		"entity",
+		"loaded",
+		"predicate",
+		"score"
+	};
 }
 
 #endif

@@ -7,9 +7,10 @@
 using namespace std;
 
 string combineMultipleWhitespaces(const string& str) {
+	// TODO: ignore string literals in commands ("" or '') - but actually don't ignore newlines (\n)
 	string result = str;
 	for (int i = 0; i < result.length(); i++) {
-		if (isspace(i)) {
+		if (isspace(str[i])) {
 			int whitespacesStart = i;
 			do {
 				i++;

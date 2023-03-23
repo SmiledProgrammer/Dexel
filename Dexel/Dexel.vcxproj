@@ -128,17 +128,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Lexer.cpp" />
-    <ClCompile Include="Token.cpp" />
-    <ClCompile Include="Transpiler.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src/test/LexerTest.cpp" />
+    <ClCompile Include="src/main/dexel/Lexer.cpp" />
+    <ClCompile Include="src/main/dexel/Token.cpp" />
+    <ClCompile Include="src/main/dexel/Transpiler.cpp" />
+    <ClCompile Include="src/main/Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LanguageConstants.h" />
-    <ClInclude Include="Lexer.h" />
-    <ClInclude Include="StringUtils.h" />
-    <ClInclude Include="Transpiler.h" />
-    <ClInclude Include="Token.h" />
+    <ClInclude Include="src/test/LexerTest.h" />
+    <ClInclude Include="src/main/dexel/LanguageConstants.h" />
+    <ClInclude Include="src/main/dexel/Lexer.h" />
+    <ClInclude Include="src/main/dexel/StringUtils.h" />
+    <ClInclude Include="src/main/dexel/MapUtils.h" />
+    <ClInclude Include="src/main/dexel/Transpiler.h" />
+    <ClInclude Include="src/main/dexel/Token.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

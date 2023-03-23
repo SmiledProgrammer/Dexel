@@ -28,8 +28,11 @@ namespace dexel {
 		void processInteger();
 		void processExpression();
 		void processCommand(string& expression);
+		void processCondition(string& expression);
 		void processDexelKeyword(Token::Type keywordTokenType, const string& keyword);
 		void processIdentifier(const string& identifier);
+
+		bool isIdentifierCharacter(char c);
 
 	};
 }

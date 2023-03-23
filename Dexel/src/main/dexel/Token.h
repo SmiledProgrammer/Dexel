@@ -10,7 +10,9 @@ namespace dexel {
 	class Token {
 	public:
 		enum Type {
+			TYPE_UNKNOWN_SYMBOL,
 			TYPE_COMMAND,
+			TYPE_CONDITION,
 			TYPE_IDENTIFIER,
 			TYPE_FUNCTION_KEYWORD,
 			TYPE_IF_KEYWORD,
@@ -37,8 +39,14 @@ namespace dexel {
 	public:
 		Token(Type type, const string& value = "");
 
-		inline Type getType() { return m_type; }
-		inline string getValue() { return m_value; }
+		inline Type getType() const { return m_type; }
+		inline string getValue() const { return m_value; }
+
+		// TODO: move to source file
+		friend bool operator==(const Token& left, const Token& right) {
+			return left.getType() == right.getType() &&
+				left.getValue() == right.getValue();
+		}
 
 	};
 }

@@ -8,6 +8,7 @@ using namespace dexel;
 
 const char COMMENT_CHAR = '#';
 const char EXPRESSION_SEPARATOR_CHAR = ';';
+const char CONDITION_TERMINATING_CHAR = ')';
 
 Lexer::Lexer(const string& code) {
 	m_code = code;
@@ -31,6 +32,8 @@ list<Token> Lexer::tokenize() {
 					processInteger();
 				} else if (isalpha(m_currentChar)) {
 					processExpression();
+				} else {
+					return list<Token>({ Token(Token::TYPE_UNKNOWN_SYMBOL) });
 				}
 			}
 		}
@@ -68,13 +71,16 @@ void Lexer::processExpression() {
 	do {
 		expression += m_currentChar;
 		advance();
-	} while (isalnum(m_currentChar)); // TODO: reading selectors (@...) or conditions overall or just handling unknown characters/expressions
+		// TODO: semicolon escaping
+	} while (isIdentifierCharacter(m_currentChar));
 	if (COMMAND_KEYWORDS.contains(expression)) {
 		processCommand(expression);
 	} else {
 		auto keywordToken = DEXEL_KEYWORD_TOKENS.find(expression);
 		if (keywordToken != DEXEL_KEYWORD_TOKENS.end()) {
 			processDexelKeyword(keywordToken->second, expression);
+		} else if (m_tokens.back().getType() == Token::TYPE_LEFT_PARENTHESES_SEPARATOR && CONDITION_KEYWORDS.contains(expression)) {
+			processCondition(expression);
 		} else {
 			processIdentifier(expression);
 		}
@@ -85,11 +91,19 @@ void Lexer::processCommand(string& expression) {
 	do {
 		expression += m_currentChar;
 		advance();
+		// TODO: semicolon escaping
 	} while (m_currentChar != EXPRESSION_SEPARATOR_CHAR && m_currentChar != NULL);
-	string combinedExpression = combineMultipleWhitespaces(expression);
-	m_tokens.push_back(Token(Token::TYPE_COMMAND, combinedExpression));
-	Token(Token::TYPE_COMMAND, combinedExpression).getType();
-	Token(Token::TYPE_COMMAND, combinedExpression).getValue();
+	expression = combineMultipleWhitespaces(expression);
+	m_tokens.push_back(Token(Token::TYPE_COMMAND, expression));
+}
+
+void Lexer::processCondition(string& expression) {
+	do {
+		expression += m_currentChar;
+		advance();
+	} while (m_currentChar != CONDITION_TERMINATING_CHAR && m_currentChar != NULL);
+	expression = combineMultipleWhitespaces(expression);
+	m_tokens.push_back(Token(Token::TYPE_CONDITION, expression));
 }
 
 void Lexer::processDexelKeyword(Token::Type keywordTokenType, const string& keyword) {
@@ -98,4 +112,8 @@ void Lexer::processDexelKeyword(Token::Type keywordTokenType, const string& keyw
 
 void Lexer::processIdentifier(const string& identifier) {
 	m_tokens.push_back(Token(Token::TYPE_IDENTIFIER, identifier));
+}
+
+bool Lexer::isIdentifierCharacter(char c) {
+	return isalnum(c) || c == '_' || c == '@';
 }
