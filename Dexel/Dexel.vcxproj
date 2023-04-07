@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src/test/LexerTest.cpp" />
+    <ClCompile Include="src/main/dexel/DatapackGenerator.cpp" />
     <ClCompile Include="src/main/dexel/Lexer.cpp" />
     <ClCompile Include="src/main/dexel/Token.cpp" />
     <ClCompile Include="src/main/dexel/Transpiler.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src/test/LexerTest.h" />
+    <ClInclude Include="src/main/dexel/DatapackGenerator.h" />
     <ClInclude Include="src/main/dexel/LanguageConstants.h" />
     <ClInclude Include="src/main/dexel/Lexer.h" />
     <ClInclude Include="src/main/dexel/StringUtils.h" />

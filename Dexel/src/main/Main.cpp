@@ -1,8 +1,6 @@
 #include "dexel/Transpiler.h"
-
-#include "dexel/Lexer.h"
-#include "dexel/LanguageConstants.h"
 #include "../test/LexerTest.h"
+#include "dexel/DatapackGenerator.h"
 
 using namespace dexel;
 
@@ -21,6 +19,9 @@ int main(int argc, char** argv) {
 
 	LexerTest lexerTest;
 	lexerTest.runTests();
+
+	DatapackGenerator dg(transpiler.getDestinationDirectory(), transpiler.getOverrideDirectories());
+	dg.generateDatapack();
 
 	return 0;
 }

@@ -18,6 +18,12 @@ namespace dexel {
 	public:
 		int parseArguments(int argc, char** argv);
 
+		inline const string& const getDestinationDirectory() { return m_destinationDirectory; }
+		inline bool const getOverrideDirectories() { return m_overrideDirectories; }
+
+	private:
+		int printError(int errorCode);
+
 	};
 }
 
