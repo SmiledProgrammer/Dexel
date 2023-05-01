@@ -39,8 +39,10 @@ namespace dexel {
 	public:
 		Token(Type type, const string& value = "");
 
+		static string typeToString(Type type);
+
 		inline Type getType() const { return m_type; }
-		inline string getValue() const { return m_value; }
+		inline const string& getValue() const { return m_value; }
 
 		// TODO: move to source file
 		friend bool operator==(const Token& left, const Token& right) {

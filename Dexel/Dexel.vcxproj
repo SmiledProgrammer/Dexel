@@ -131,8 +131,16 @@
     <ClCompile Include="src/test/LexerTest.cpp" />
     <ClCompile Include="src/main/dexel/DatapackGenerator.cpp" />
     <ClCompile Include="src/main/dexel/Lexer.cpp" />
+    <ClCompile Include="src/main/dexel/Parser.cpp" />
     <ClCompile Include="src/main/dexel/Token.cpp" />
     <ClCompile Include="src/main/dexel/Transpiler.cpp" />
+    <ClInclude Include="src/main/dexel/component/CommandComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/ConditionComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/DexelFileSyntaxComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/FunctionCallComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/FunctionDefinitionComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/SyntaxComponent.cpp" />
+    <ClInclude Include="src/main/dexel/component/VariableAssignmentComponent.cpp" />
     <ClCompile Include="src/main/Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,10 +148,18 @@
     <ClInclude Include="src/main/dexel/DatapackGenerator.h" />
     <ClInclude Include="src/main/dexel/LanguageConstants.h" />
     <ClInclude Include="src/main/dexel/Lexer.h" />
+    <ClInclude Include="src/main/dexel/Parser.h" />
     <ClInclude Include="src/main/dexel/StringUtils.h" />
     <ClInclude Include="src/main/dexel/MapUtils.h" />
     <ClInclude Include="src/main/dexel/Transpiler.h" />
     <ClInclude Include="src/main/dexel/Token.h" />
+    <ClInclude Include="src/main/dexel/component/CommandComponent.h" />
+    <ClInclude Include="src/main/dexel/component/ConditionComponent.h" />
+    <ClInclude Include="src/main/dexel/component/DexelFileSyntaxComponent.h" />
+    <ClInclude Include="src/main/dexel/component/FunctionCallComponent.h" />
+    <ClInclude Include="src/main/dexel/component/FunctionDefinitionComponent.h" />
+    <ClInclude Include="src/main/dexel/component/SyntaxComponent.h" />
+    <ClInclude Include="src/main/dexel/component/VariableAssignmentComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,6 +2,7 @@
 #define DATAPACK_GENERATOR_H
 
 #include <string>
+#include "component/DexelFileSyntaxComponent.h"
 
 using namespace std;
 
@@ -15,11 +16,11 @@ namespace dexel {
 	public:
 		DatapackGenerator(const string& destinationDirectory, bool overrideDirectories);
 
-		void generateDatapack(/* TODO: list<SyntaxStructure> */);
+		void generateDatapack(const vector<DexelFileSyntaxComponent>& components);
 
 	private:
 		void generateEmptyDatapack(const string& datapackName);
-		void generateMCFunctionFiles(/* TODO: list<SyntaxStructure> */);
+		void generateMCFunctionFiles(const vector<DexelFileSyntaxComponent>& components);
 
 		void createPackMCMetaFile(const string& pathStr);
 

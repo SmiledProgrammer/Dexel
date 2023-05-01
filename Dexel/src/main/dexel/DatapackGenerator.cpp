@@ -3,19 +3,21 @@
 #include <filesystem>
 #include <iostream>
 #include <fstream>
+#include "StringUtils.h"
 
 using namespace dexel;
 using namespace std;
 namespace fs = filesystem;
 
 const string FUNCTIONS_NAMESPACE = "dexel";
+const string TAB = "\t";
 
 DatapackGenerator::DatapackGenerator(const string& destinationDirectory, bool overrideDirectories)
 	: m_destinationDirectory(destinationDirectory), m_overrideDirectories(overrideDirectories) {}
 
-void DatapackGenerator::generateDatapack(/* TODO: list<SyntaxStructure> */) {
+void DatapackGenerator::generateDatapack(const vector<DexelFileSyntaxComponent>& components) {
 	generateEmptyDatapack("DexelDatapack");
-	generateMCFunctionFiles();
+	generateMCFunctionFiles(components);
 }
 
 void DatapackGenerator::generateEmptyDatapack(const string& datapackName) {
@@ -35,17 +37,27 @@ void DatapackGenerator::generateEmptyDatapack(const string& datapackName) {
 	}
 }
 
-void DatapackGenerator::generateMCFunctionFiles(/* TODO: list<SyntaxStructure> */) {
-	// TODO
+void DatapackGenerator::generateMCFunctionFiles(const vector<DexelFileSyntaxComponent>& components) {
+	for (DexelFileSyntaxComponent dexelFile : components) {
+		string filepath = dexelFile.getFilepath();
+		for (SyntaxComponent component : dexelFile.getComponents()) {
+			string callingCode = component.convertToMCFunctionCode();
+			// TODO: move this
+			/*string generatedFilepath = cutDexelExtensionFromFilepath(sourceFilepath) + "-" + component->getFunctionIdentifier() + ".mcfunction";
+			ofstream fileStream(generatedFilepath);
+			fileStream << component->convertToMCFunctionCode() << endl;
+			fileStream.close();*/
+		}
+	}
 }
 
 void DatapackGenerator::createPackMCMetaFile(const string& pathStr) {
 	ofstream fileStream(pathStr);
 	fileStream << "{" << endl;
-	fileStream << "\t\"pack\": {" << endl;
-	fileStream << "\t\t\"pack_format\": 10," << endl;
-	fileStream << "\t\t\"description\": \"Datapack created with Dexel language\"," << endl;
-	fileStream << "\t}" << endl;
+	fileStream << TAB << "\"pack\": {" << endl;
+	fileStream << TAB << TAB << "\"pack_format\": 10," << endl;
+	fileStream << TAB << TAB << "\"description\": \"Datapack created with Dexel language\"," << endl;
+	fileStream << TAB << "}" << endl;
 	fileStream << "}" << endl;
 	fileStream.close();
 }

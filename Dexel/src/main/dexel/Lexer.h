@@ -2,7 +2,7 @@
 #define LEXER_H
 
 #include <string>
-#include <list>
+#include <vector>
 #include "Token.h"
 
 using namespace std;
@@ -14,12 +14,12 @@ namespace dexel {
 		string m_code;
 		int m_position;
 		char m_currentChar;
-		list<Token> m_tokens;
+		vector<Token> m_tokens;
 
 	public:
 		Lexer(const string& code);
 
-		list<Token> tokenize();
+		vector<Token> tokenize();
 
 	private:
 		void advance();

@@ -17,7 +17,7 @@ Lexer::Lexer(const string& code) {
 	advance();
 }
 
-list<Token> Lexer::tokenize() {
+vector<Token> Lexer::tokenize() {
 	while (m_currentChar != NULL) {
 		if (isspace(m_currentChar)) {
 			advance();
@@ -33,7 +33,7 @@ list<Token> Lexer::tokenize() {
 				} else if (isalpha(m_currentChar)) {
 					processExpression();
 				} else {
-					return list<Token>({ Token(Token::TYPE_UNKNOWN_SYMBOL) });
+					return vector<Token>({ Token(Token::TYPE_UNKNOWN_SYMBOL) });
 				}
 			}
 		}
