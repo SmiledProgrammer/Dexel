@@ -15,7 +15,7 @@ using namespace dexel;
 SyntaxComponent::SyntaxComponent(vector<Token>& tokens, int index)
 	: m_tokens(tokens), m_index(index) {}
 
-bool SyntaxComponent::readComponent() {
+void SyntaxComponent::readComponent() {
 	throw "Unexpected internal error.";
 }
 
@@ -44,13 +44,14 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 			SyntaxComponent component = createComponentFromToken(token);
 			components.push_back(component);
 		}
+		getNextToken();
 	} catch (out_of_range ex) {
 		throw "Expected end of braces block here.";
 	}
 	return components;
 }
 
-bool SyntaxComponent::checkNextTokensTypes(const vector<Token::Type>& nextTokensTypes) {
+void SyntaxComponent::checkNextTokensTypes(const vector<Token::Type>& nextTokensTypes) {
 	for (int i = 0; i < nextTokensTypes.size(); i++) {
 		Token nextTokenType = getNextToken().getType();
 		Token::Type expectedType = nextTokensTypes[i];
@@ -58,7 +59,6 @@ bool SyntaxComponent::checkNextTokensTypes(const vector<Token::Type>& nextTokens
 			throw "Expected token here of type: " + Token::typeToString(expectedType);
 		}
 	}
-	return true;
 }
 
 void SyntaxComponent::createMCFunctionFile(const string& functionName, const string& dexelCode) {

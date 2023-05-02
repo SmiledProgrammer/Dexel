@@ -12,7 +12,7 @@ namespace dexel {
 	public:
 		CommandComponent(vector<Token>& tokens, int index);
 
-		bool readComponent() override;
+		void readComponent() override;
 		string convertToMCFunctionCode(const string& destinationFilepath) override;
 
 	};

@@ -7,7 +7,7 @@ using namespace dexel;
 ConditionComponent::ConditionComponent(vector<Token>& tokens, int index)
 	: SyntaxComponent(tokens, index) {}
 
-bool ConditionComponent::readComponent() {
+void ConditionComponent::readComponent() {
 	Token ifToken = getNextToken();
 	if (ifToken.getType() != Token::TYPE_IF_KEYWORD) {
 		throw "Unexpected internal error.";

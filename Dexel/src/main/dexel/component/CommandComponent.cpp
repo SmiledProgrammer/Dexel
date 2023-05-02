@@ -5,13 +5,12 @@ using namespace dexel;
 CommandComponent::CommandComponent(vector<Token>& tokens, int index)
 	: SyntaxComponent(tokens, index) {}
 
-bool CommandComponent::readComponent() {
+void CommandComponent::readComponent() {
 	Token commandToken = getNextToken();
-	if (commandToken.getType() == Token::TYPE_COMMAND) {
-		m_commandExpression = commandToken.getValue();
-		return true;
+	if (commandToken.getType() != Token::TYPE_COMMAND) {
+		throw "Expected a minecraft command here";
 	}
-	return false;
+	m_commandExpression = commandToken.getValue();
 }
 
 string CommandComponent::convertToMCFunctionCode(const string& destinationFilepath) {
