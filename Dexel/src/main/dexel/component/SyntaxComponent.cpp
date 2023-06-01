@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include "FunctionCallComponent.h"
 #include "FunctionDefinitionComponent.h"
 #include "CommandComponent.h"
 #include "ConditionComponent.h"
@@ -40,8 +41,7 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 	}
 	try {
 		while (m_tokens.at(m_index).getType() != Token::TYPE_RIGHT_BRACES_SEPARATOR) {
-			Token token = getNextToken();
-			SyntaxComponent component = createComponentFromToken(token);
+			SyntaxComponent component = createComponentFromNextToken();
 			components.push_back(component);
 		}
 		getNextToken();
@@ -68,11 +68,17 @@ void SyntaxComponent::createMCFunctionFile(const string& functionName, const str
 	fileStream.close();
 }
 
-SyntaxComponent SyntaxComponent::createComponentFromToken(Token token) {
-	switch (token.getType()) {
-	case Token::TYPE_COMMAND: return CommandComponent(m_tokens, m_index);
-	case Token::TYPE_IF_KEYWORD: return ConditionComponent(m_tokens, m_index);
-	// case Token::TYPE_IDENTIFIER: return VariableAssignmentComponent(m_tokens, m_index);
-	default: throw "Cannot parse code structure.";
+SyntaxComponent SyntaxComponent::createComponentFromNextToken() {
+	switch (getNextToken().getType()) {
+	case Token::TYPE_COMMAND: return CommandComponent(m_tokens, m_index - 1);
+	case Token::TYPE_IF_KEYWORD: return ConditionComponent(m_tokens, m_index - 1);
+	case Token::TYPE_IDENTIFIER:
+		Token::Type tokenType = getNextToken().getType();
+		if (tokenType == Token::TYPE_EQUALS_OPERATOR) {
+			return VariableAssignmentComponent(m_tokens, m_index - 2);
+		} else if (tokenType == Token::TYPE_LEFT_PARENTHESES_SEPARATOR) {
+			return FunctionCallComponent(m_tokens, m_index - 2);
+		}
 	}
+	throw "Cannot parse code structure.";
 }

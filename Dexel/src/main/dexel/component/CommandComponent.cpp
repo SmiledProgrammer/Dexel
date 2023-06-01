@@ -2,14 +2,19 @@
 
 using namespace dexel;
 
+const vector<Token::Type> CommandComponent::m_commandExpressionPattern{
+	Token::TYPE_COMMAND,
+	Token::TYPE_SEMICOLON_SEPARATOR
+};
+
+
 CommandComponent::CommandComponent(vector<Token>& tokens, int index)
 	: SyntaxComponent(tokens, index) {}
 
 void CommandComponent::readComponent() {
-	Token commandToken = getNextToken();
-	if (commandToken.getType() != Token::TYPE_COMMAND) {
-		throw "Expected a minecraft command here";
-	}
+	int commandIndex = m_index;
+	checkNextTokensTypes(m_commandExpressionPattern);
+	Token commandToken = m_tokens[commandIndex];
 	m_commandExpression = commandToken.getValue();
 }
 

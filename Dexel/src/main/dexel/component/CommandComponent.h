@@ -7,6 +7,8 @@ namespace dexel {
 
 	class CommandComponent : public SyntaxComponent {
 
+		static const vector<Token::Type> m_commandExpressionPattern;
+
 		string m_commandExpression;
 
 	public:

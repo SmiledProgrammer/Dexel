@@ -4,12 +4,12 @@
 #include <iostream>
 #include <fstream>
 #include "StringUtils.h"
+#include "LanguageConstants.h"
 
 using namespace dexel;
 using namespace std;
 namespace fs = filesystem;
 
-const string FUNCTIONS_NAMESPACE = "dexel";
 const string TAB = "\t";
 
 DatapackGenerator::DatapackGenerator(const string& destinationDirectory, bool overrideDirectories)
@@ -21,7 +21,7 @@ void DatapackGenerator::generateDatapack(const vector<DexelFileSyntaxComponent>&
 }
 
 void DatapackGenerator::generateEmptyDatapack(const string& datapackName) {
-	string functionsPathStr = "\\" + datapackName + "\\data\\" + FUNCTIONS_NAMESPACE + "\\functions";
+	string functionsPathStr = "\\" + datapackName + "\\data\\" + DEXEL_DATAPACK_NAMESPACE + "\\functions";
 	string absoluteFunctionsPathStr = m_destinationDirectory + functionsPathStr;
 	if (fs::is_directory(fs::path(absoluteFunctionsPathStr))) {
 		cout << "[WARN] Functions directory already exists and will not be overriden." << endl;

@@ -158,6 +158,7 @@
     <ClInclude Include="src/main/dexel/component/DexelFileSyntaxComponent.h" />
     <ClInclude Include="src/main/dexel/component/FunctionCallComponent.h" />
     <ClInclude Include="src/main/dexel/component/FunctionDefinitionComponent.h" />
+    <ClInclude Include="src/main/dexel/component/NumericValues.h" />
     <ClInclude Include="src/main/dexel/component/SyntaxComponent.h" />
     <ClInclude Include="src/main/dexel/component/VariableAssignmentComponent.h" />
   </ItemGroup>

@@ -29,7 +29,7 @@ namespace dexel {
 		void createMCFunctionFile(const string& functionName, const string& dexelCode);
 		
 	private:
-		SyntaxComponent createComponentFromToken(Token token);
+		SyntaxComponent createComponentFromNextToken();
 
 	};
 }

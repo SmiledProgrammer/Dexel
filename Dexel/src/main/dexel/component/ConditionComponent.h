@@ -1,12 +1,14 @@
 #ifndef CONDITION_COMPONENT_H
 #define CONDITION_COMPONENT_H
 
-#include <list>
 #include "SyntaxComponent.h"
 
 namespace dexel {
 
 	class ConditionComponent : public SyntaxComponent {
+
+		static const vector<Token::Type> m_ifBlockStartingPattern;
+		static const vector<Token::Type> m_elseIfBlockStartingPattern;
 
 		struct ConditionBlock {
 			string condition;
@@ -23,9 +25,6 @@ namespace dexel {
 
 		void readComponent() override;
 		string convertToMCFunctionCode(const string& destinationFilepath) override;
-
-	private:
-		string readCondition();
 
 	};
 }

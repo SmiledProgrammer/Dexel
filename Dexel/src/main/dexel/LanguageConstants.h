@@ -8,6 +8,8 @@
 
 namespace dexel {
 
+	const string DEXEL_DATAPACK_NAMESPACE = "dexel";
+
 	const map<char, Token::Type> SYMBOL_TOKENS{
 		{'=', Token::TYPE_EQUALS_OPERATOR},
 		{'+', Token::TYPE_PLUS_OPERATOR},
