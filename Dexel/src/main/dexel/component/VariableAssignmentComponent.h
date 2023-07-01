@@ -44,10 +44,11 @@ namespace dexel {
 	class VariableAssignmentComponent : public SyntaxComponent {
 
 		static const vector<Token::Type> m_startingPattern;
-		static const map<Token::Type, int> m_operatorsPrecedence;
+		static const map<NumericOperator, int> m_operatorsPrecedence;
 
 		string m_variableName;
 		NumericValue m_numericValue;
+		Token::Type m_lastOperationRead;
 
 	public:
 		VariableAssignmentComponent(vector<Token>& tokens, int index);
@@ -57,7 +58,12 @@ namespace dexel {
 
 	private:
 		bool isAssignmentExpressionValid();
-		NumericValue parseNumericValue(int startingTokenIndex);
+		NumericValue parseNumericValue(int& startingTokenIndex);
+		NumericValue readOperandNumericValue(int& index);
+		NumericOperator readNumericValueOperator(int index);
+		bool hasOperatorHigherPrecedence(NumericOperator thisOperator, NumericOperator otherOperator);
+		NumericValue tryToSimplifyNumericValue(NumericValue numericValue);
+		NumericValue tryToSimplifyOperationValue(OperationValue operationValue);
 
 	};
 }

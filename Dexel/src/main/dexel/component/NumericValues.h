@@ -16,13 +16,14 @@ namespace dexel {
 
 	struct NumericValue {
 		static enum Type {
+			NONE,
 			OPERATION_VALUE,
 			IDENTIFIER_VALUE,
 			LITERAL_INTEGER_VALUE
 		};
 
 		virtual Type getNumericValueType() {
-			throw "Cannot get proper numeric value type";
+			return NONE;
 		}
 	};
 
@@ -61,22 +62,6 @@ namespace dexel {
 			return LITERAL_INTEGER_VALUE;
 		}
 	};
-
-	NumericValue tryToSimplifyOperationValue(OperationValue operationValue) {
-		if (operationValue.leftOperand.getNumericValueType() == NumericValue::LITERAL_INTEGER_VALUE &&
-			operationValue.rightOperand.getNumericValueType() == NumericValue::LITERAL_INTEGER_VALUE)
-		{
-			int leftValue = dynamic_cast<LiteralIntegerValue&>(operationValue.leftOperand).intValue;
-			int rightValue = dynamic_cast<LiteralIntegerValue&>(operationValue.rightOperand).intValue;
-			switch (operationValue.numericOperator) {
-			case NumericOperator::ADD: return LiteralIntegerValue(leftValue + rightValue);
-			case NumericOperator::SUBTRACT: return LiteralIntegerValue(leftValue - rightValue);
-			case NumericOperator::MULTIPLY: return LiteralIntegerValue(leftValue * rightValue);
-			case NumericOperator::DIVIDE: return LiteralIntegerValue(leftValue / rightValue);
-			}
-		}
-		return operationValue;
-	}
 }
 
 #endif

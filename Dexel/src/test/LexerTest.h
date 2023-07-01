@@ -1,7 +1,6 @@
 #ifndef LEXER_TEST_H
 #define LEXER_TEST_H
 
-#include <list>
 #include <string>
 #include "../main/dexel/Lexer.h"
 
@@ -14,13 +13,13 @@ namespace dexel {
 	public:
 		struct TestCase {
 			string code;
-			list<Token> expectedTokens;
+			vector<Token> expectedTokens;
 
-			TestCase(const string& code, list<Token> expectedTokens)
+			TestCase(const string& code, vector<Token> expectedTokens)
 				: code(code), expectedTokens(expectedTokens) {}
 		};
 
-		list<TestCase> m_testCases;
+		vector<TestCase> m_testCases;
 
 	public:
 		LexerTest();
@@ -28,8 +27,8 @@ namespace dexel {
 		int runTests();
 
 	private:
-		void displayFailInfo(const list<Token>& expectedTokens, const list<Token>& actualTokens);
-		void displayTokenList(const list<Token>& tokens);
+		void displayFailInfo(const vector<Token>& expectedTokens, const vector<Token>& actualTokens);
+		void displayTokenVector(const vector<Token>& tokens);
 
 	};
 }

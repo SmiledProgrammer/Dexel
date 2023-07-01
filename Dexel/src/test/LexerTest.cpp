@@ -65,9 +65,9 @@ LexerTest::LexerTest() {
 int LexerTest::runTests() {
 	int failedTestsCount = 0;
 	for (TestCase testCase : m_testCases) {
-		list<Token> expectedTokens = testCase.expectedTokens;
+		vector<Token> expectedTokens = testCase.expectedTokens;
 		Lexer lexer(testCase.code);
-		list<Token> actualTokens = lexer.tokenize();
+		vector<Token> actualTokens = lexer.tokenize();
 		if (expectedTokens != actualTokens) {
 			failedTestsCount++;
 			displayFailInfo(expectedTokens, actualTokens);
@@ -77,14 +77,14 @@ int LexerTest::runTests() {
 	return failedTestsCount;
 }
 
-void LexerTest::displayFailInfo(const list<Token>& expectedTokens, const list<Token>& actualTokens) {
+void LexerTest::displayFailInfo(const vector<Token>& expectedTokens, const vector<Token>& actualTokens) {
 	cout << "Test failed - expected tokens:" << endl;
-	displayTokenList(expectedTokens);
+	displayTokenVector(expectedTokens);
 	cout << "but actually got tokens:" << endl;
-	displayTokenList(actualTokens);
+	displayTokenVector(actualTokens);
 }
 
-void LexerTest::displayTokenList(const list<Token>& tokens) {
+void LexerTest::displayTokenVector(const vector<Token>& tokens) {
 	for (Token token : tokens) {
 		auto tokenChar = reverseOfSymbolTokens.find(token.getType());
 		if (tokenChar != reverseOfSymbolTokens.end()) {
