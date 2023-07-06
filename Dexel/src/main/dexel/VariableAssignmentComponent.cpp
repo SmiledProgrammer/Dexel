@@ -3,6 +3,7 @@
 using namespace dexel;
 
 const vector<Token::Type> VariableAssignmentComponent::m_startingPattern{
+	Token::TYPE_INT_KEYWORD,
 	Token::TYPE_IDENTIFIER,
 	Token::TYPE_EQUALS_OPERATOR
 };
@@ -16,7 +17,7 @@ const map<NumericOperator, int> VariableAssignmentComponent::m_operatorsPreceden
 
 
 VariableAssignmentComponent::VariableAssignmentComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index), m_lastOperationRead(Token::TYPE_UNKNOWN_SYMBOL) {}
+	: SyntaxComponent(tokens, index) {}
 
 void VariableAssignmentComponent::readComponent() {
 	int variableNameIndex = m_index;

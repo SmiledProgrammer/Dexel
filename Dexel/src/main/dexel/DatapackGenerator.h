@@ -2,7 +2,7 @@
 #define DATAPACK_GENERATOR_H
 
 #include <string>
-#include "component/DexelFileSyntaxComponent.h"
+#include "DexelFileSyntaxComponent.h"
 
 using namespace std;
 

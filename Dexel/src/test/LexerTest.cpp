@@ -47,7 +47,8 @@ LexerTest::LexerTest() {
 		"\t} else {\n" +
 		"\t\tsay Very bad.;\n" +
 		"\t}\n"
-		"}\n"*/,
+		"}\n"*/
+		,
 		{
 			Token(Token::TYPE_FUNCTION_KEYWORD, "function"),
 			Token(Token::TYPE_IDENTIFIER, "main"),
@@ -73,14 +74,14 @@ int LexerTest::runTests() {
 			displayFailInfo(expectedTokens, actualTokens);
 		}
 	}
-	cout << "Tests run. Failed tests count: " << failedTestsCount << endl;
+	cout << "Lexer tests run. Failed tests count: " << failedTestsCount << endl;
 	return failedTestsCount;
 }
 
 void LexerTest::displayFailInfo(const vector<Token>& expectedTokens, const vector<Token>& actualTokens) {
 	cout << "Test failed - expected tokens:" << endl;
 	displayTokenVector(expectedTokens);
-	cout << "but actually got tokens:" << endl;
+	cout << "but actually got:" << endl;
 	displayTokenVector(actualTokens);
 }
 

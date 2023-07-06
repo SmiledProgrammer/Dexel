@@ -41,7 +41,7 @@ void DatapackGenerator::generateMCFunctionFiles(const vector<DexelFileSyntaxComp
 	for (DexelFileSyntaxComponent dexelFile : components) {
 		string filepath = dexelFile.getFilepath();
 		for (SyntaxComponent component : dexelFile.getComponents()) {
-			string callingCode = component.convertToMCFunctionCode();
+			//string callingCode = component.convertToMCFunctionCode();
 			// TODO: move this
 			/*string generatedFilepath = cutDexelExtensionFromFilepath(sourceFilepath) + "-" + component->getFunctionIdentifier() + ".mcfunction";
 			ofstream fileStream(generatedFilepath);

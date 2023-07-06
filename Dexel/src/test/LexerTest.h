@@ -4,7 +4,6 @@
 #include <string>
 #include "../main/dexel/Lexer.h"
 
-
 using namespace std;
 
 namespace dexel {
@@ -19,6 +18,7 @@ namespace dexel {
 				: code(code), expectedTokens(expectedTokens) {}
 		};
 
+	private:
 		vector<TestCase> m_testCases;
 
 	public:

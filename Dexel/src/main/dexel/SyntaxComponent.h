@@ -2,7 +2,7 @@
 #define SYNTAX_COMPONENT_H
 
 #include <vector>
-#include "../Token.h"
+#include "Token.h"
 
 namespace dexel {
 
@@ -18,7 +18,7 @@ namespace dexel {
 
 	public:
 		virtual void readComponent();
-		virtual string convertToMCFunctionCode(const string& destinationFilepath);
+		virtual string convertToMCFunctionCode(const string& destinationFilepath); // TODO: sprawdz czy ten parametr jest potrzebny
 
 		static void setGlobalDestinationDirectoryPath(const string& dirPath);
 

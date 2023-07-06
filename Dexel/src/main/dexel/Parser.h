@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Token.h"
-#include "component/DexelFileSyntaxComponent.h"
+#include "DexelFileSyntaxComponent.h"
 
 namespace dexel {
 

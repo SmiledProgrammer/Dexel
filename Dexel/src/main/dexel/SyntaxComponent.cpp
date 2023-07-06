@@ -72,13 +72,8 @@ SyntaxComponent SyntaxComponent::createComponentFromNextToken() {
 	switch (getNextToken().getType()) {
 	case Token::TYPE_COMMAND: return CommandComponent(m_tokens, m_index - 1);
 	case Token::TYPE_IF_KEYWORD: return ConditionComponent(m_tokens, m_index - 1);
-	case Token::TYPE_IDENTIFIER:
-		Token::Type tokenType = getNextToken().getType();
-		if (tokenType == Token::TYPE_EQUALS_OPERATOR) {
-			return VariableAssignmentComponent(m_tokens, m_index - 2);
-		} else if (tokenType == Token::TYPE_LEFT_PARENTHESES_SEPARATOR) {
-			return FunctionCallComponent(m_tokens, m_index - 2);
-		}
+	case Token::TYPE_IDENTIFIER: return FunctionCallComponent(m_tokens, m_index - 1);
+	case Token::TYPE_INT_KEYWORD: return VariableAssignmentComponent(m_tokens, m_index - 1);
 	}
 	throw "Cannot parse code structure.";
 }

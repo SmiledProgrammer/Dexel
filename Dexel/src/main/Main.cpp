@@ -2,9 +2,18 @@
 #include "dexel/Lexer.h"
 #include "dexel/Parser.h"
 #include "../test/LexerTest.h"
+#include "../test/NumericValuesTest.h"
 #include "dexel/DatapackGenerator.h"
 
 using namespace dexel;
+
+void runTests() {
+	LexerTest lexerTest;
+	lexerTest.runTests();
+
+	NumericValuesTest numericValuesTest;
+	numericValuesTest.runTests();
+}
 
 int main(int argc, char** argv) {
 	Transpiler transpiler = Transpiler();
@@ -19,13 +28,13 @@ int main(int argc, char** argv) {
 		"\t};\n" +
 		"}\n";
 
-	LexerTest lexerTest;
-	lexerTest.runTests();
+	runTests();
+	
 
 	Lexer lexer(code);
 	auto tokens = lexer.tokenize();
 
-	SyntaxComponent::setGlobalDestinationDirectoryFilepath(transpiler.getDestinationDirectory());
+	SyntaxComponent::setGlobalDestinationDirectoryPath(transpiler.getDestinationDirectory());
 	Parser parser(tokens, transpiler.getSourceFile());
 	auto components = parser.parse();
 

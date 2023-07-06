@@ -22,7 +22,7 @@ namespace dexel {
 			LITERAL_INTEGER_VALUE
 		};
 
-		virtual Type getNumericValueType() {
+		virtual Type getNumericValueType() const {
 			return NONE;
 		}
 	};
@@ -36,7 +36,7 @@ namespace dexel {
 		OperationValue(NumericValue leftOperand, NumericValue rightOperand, NumericOperator numericOperator)
 			: leftOperand(leftOperand), rightOperand(rightOperand), numericOperator(numericOperator) {}
 
-		Type getNumericValueType() override {
+		Type getNumericValueType() const override {
 			return OPERATION_VALUE;
 		}
 	};
@@ -47,7 +47,7 @@ namespace dexel {
 		IdentifierValue(string identifier)
 			: identifier(identifier) {}
 
-		Type getNumericValueType() override {
+		Type getNumericValueType() const override {
 			return IDENTIFIER_VALUE;
 		}
 	};
@@ -58,7 +58,7 @@ namespace dexel {
 		LiteralIntegerValue(int intValue)
 			: intValue(intValue) {}
 
-		Type getNumericValueType() override {
+		Type getNumericValueType() const override {
 			return LITERAL_INTEGER_VALUE;
 		}
 	};
