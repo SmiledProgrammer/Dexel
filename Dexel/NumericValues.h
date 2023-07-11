@@ -2,12 +2,14 @@
 #define NUMERIC_VALUES_H
 
 #include <string>
+#include <memory>
 
 using namespace std;
 
 namespace dexel {
 
 	enum NumericOperator {
+		NONE,
 		ADD,
 		SUBTRACT,
 		MULTIPLY,
@@ -25,19 +27,34 @@ namespace dexel {
 		virtual Type getNumericValueType() const {
 			return NONE;
 		}
+
+		virtual string toString() const {
+			return "Generic NumericValue";
+		}
 	};
 
 	struct OperationValue : public NumericValue {
 
-		NumericValue leftOperand;
-		NumericValue rightOperand;
+		shared_ptr<NumericValue> leftOperand;
+		shared_ptr<NumericValue> rightOperand;
 		NumericOperator numericOperator;
 
-		OperationValue(NumericValue leftOperand, NumericValue rightOperand, NumericOperator numericOperator)
+		OperationValue(shared_ptr<NumericValue> leftOperand, shared_ptr<NumericValue> rightOperand, NumericOperator numericOperator)
 			: leftOperand(leftOperand), rightOperand(rightOperand), numericOperator(numericOperator) {}
 
 		Type getNumericValueType() const override {
 			return OPERATION_VALUE;
+		}
+
+		string toString() const override {
+			char operatorSymbol = ' ';
+			switch (numericOperator) {
+			case NumericOperator::ADD: operatorSymbol = '+'; break;
+			case NumericOperator::SUBTRACT: operatorSymbol = '-'; break;
+			case NumericOperator::MULTIPLY: operatorSymbol = '*'; break;
+			case NumericOperator::DIVIDE: operatorSymbol = '/'; break;
+			}
+			return "OperationValue: " + leftOperand->toString() + " " + operatorSymbol + " " + rightOperand->toString();
 		}
 	};
 
@@ -50,6 +67,10 @@ namespace dexel {
 		Type getNumericValueType() const override {
 			return IDENTIFIER_VALUE;
 		}
+
+		string toString() const override {
+			return "IdentifierValue: " + identifier;
+		}
 	};
 
 	struct LiteralIntegerValue : public NumericValue {
@@ -60,6 +81,10 @@ namespace dexel {
 
 		Type getNumericValueType() const override {
 			return LITERAL_INTEGER_VALUE;
+		}
+
+		string toString() const override {
+			return "LiteralIntegerValue: " + intValue;
 		}
 	};
 }

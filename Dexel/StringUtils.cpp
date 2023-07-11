@@ -1,10 +1,4 @@
-#ifndef STRING_UTILS_H
-#define STRING_UTILS_H
-
-#include <string>
-#include <cctype>
-
-using namespace std;
+#include "StringUtils.h"
 
 string combineMultipleWhitespaces(const string& str) {
 	// TODO: ignore string literals in commands ("" or '') - but actually don't ignore newlines (\n)
@@ -27,5 +21,3 @@ string cutDexelExtensionFromFilepath(const string& str) {
 	}
 	return str;
 }
-
-#endif

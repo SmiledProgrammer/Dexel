@@ -20,5 +20,6 @@ void FunctionDefinitionComponent::readComponent() {
 }
 
 string FunctionDefinitionComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-
+	// TODO
+	return "";
 }

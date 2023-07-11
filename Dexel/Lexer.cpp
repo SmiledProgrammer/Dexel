@@ -79,7 +79,7 @@ void Lexer::processExpression() {
 		auto keywordToken = DEXEL_KEYWORD_TOKENS.find(expression);
 		if (keywordToken != DEXEL_KEYWORD_TOKENS.end()) {
 			processDexelKeyword(keywordToken->second, expression);
-		} else if (m_tokens.back().getType() == Token::TYPE_LEFT_PARENTHESES_SEPARATOR && CONDITION_KEYWORDS.contains(expression)) {
+		} else if (m_tokens.size() > 0 && m_tokens.back().getType() == Token::TYPE_LEFT_PARENTHESES_SEPARATOR && CONDITION_KEYWORDS.contains(expression)) {
 			processCondition(expression);
 		} else {
 			processIdentifier(expression);

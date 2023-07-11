@@ -2,6 +2,7 @@
 #define VARIABLE_ASSIGNMENT_COMPONENT_H
 
 #include <map>
+#include <memory>
 #include "SyntaxComponent.h"
 #include "NumericValues.h"
 
@@ -22,14 +23,14 @@ namespace dexel {
 		string convertToMCFunctionCode(const string& destinationFilepath) override;
 
 		bool isAssignmentExpressionValid();
-		NumericValue parseNumericValue(int& startingTokenIndex);
+		shared_ptr<NumericValue> parseNumericValue(int& startingTokenIndex);
 
 	private:
-		NumericValue readOperandNumericValue(int& index);
+		shared_ptr<NumericValue> readOperandNumericValue(int& index);
 		NumericOperator readNumericValueOperator(int index);
 		bool hasOperatorHigherPrecedence(NumericOperator thisOperator, NumericOperator otherOperator);
-		NumericValue tryToSimplifyNumericValue(NumericValue numericValue);
-		NumericValue tryToSimplifyOperationValue(OperationValue operationValue);
+		shared_ptr<NumericValue> tryToSimplifyNumericValue(shared_ptr<NumericValue> numericValue);
+		shared_ptr<NumericValue> tryToSimplifyOperationValue(shared_ptr<OperationValue> operationValue);
 
 	};
 }

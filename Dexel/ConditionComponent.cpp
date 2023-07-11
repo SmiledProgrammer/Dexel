@@ -48,4 +48,5 @@ string ConditionComponent::convertToMCFunctionCode(const string& destinationFile
 		// TODO
 	}
 	// TODO
+	return "";
 }

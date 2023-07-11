@@ -11,17 +11,17 @@
 using namespace dexel;
 
 // TODO: check if needed
-// string SyntaxComponent::m_destinationPath = "";
+string SyntaxComponent::m_destinationDirectoryPath = "";
 
 SyntaxComponent::SyntaxComponent(vector<Token>& tokens, int index)
 	: m_tokens(tokens), m_index(index) {}
 
 void SyntaxComponent::readComponent() {
-	throw "Unexpected internal error.";
+	throw string("Unexpected internal error.");
 }
 
 string SyntaxComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	throw "Unexpected internal error.";
+	throw string("Unexpected internal error.");
 }
 
 void SyntaxComponent::setGlobalDestinationDirectoryPath(const string& dirPath) {
@@ -36,7 +36,7 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 	vector<SyntaxComponent> components;
 	Token openBrace = getNextToken();
 	if (openBrace.getType() != Token::TYPE_LEFT_BRACES_SEPARATOR) {
-		throw "Expected beginning of braces block here.";
+		throw string("Expected beginning of braces block here.");
 		// TODO: make throws everywhere instead of printError()
 	}
 	try {
@@ -46,7 +46,7 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 		}
 		getNextToken();
 	} catch (out_of_range ex) {
-		throw "Expected end of braces block here.";
+		throw string("Expected end of braces block here.");
 	}
 	return components;
 }
@@ -56,7 +56,7 @@ void SyntaxComponent::checkNextTokensTypes(const vector<Token::Type>& nextTokens
 		Token nextTokenType = getNextToken().getType();
 		Token::Type expectedType = nextTokensTypes[i];
 		if (nextTokenType != expectedType) {
-			throw "Expected token here of type: " + Token::typeToString(expectedType);
+			throw string("Expected token here of type: " + Token::typeToString(expectedType));
 		}
 	}
 }
@@ -75,5 +75,5 @@ SyntaxComponent SyntaxComponent::createComponentFromNextToken() {
 	case Token::TYPE_IDENTIFIER: return FunctionCallComponent(m_tokens, m_index - 1);
 	case Token::TYPE_INT_KEYWORD: return VariableAssignmentComponent(m_tokens, m_index - 1);
 	}
-	throw "Cannot parse code structure.";
+	throw string("Cannot parse code structure.");
 }

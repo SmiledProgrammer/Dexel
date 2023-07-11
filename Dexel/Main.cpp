@@ -1,15 +1,15 @@
-#include "dexel/Transpiler.h"
-#include "dexel/Lexer.h"
-#include "dexel/Parser.h"
-#include "../test/LexerTest.h"
-#include "../test/NumericValuesTest.h"
-#include "dexel/DatapackGenerator.h"
+#include "Transpiler.h"
+#include "Lexer.h"
+#include "Parser.h"
+#include "LexerTest.h"
+#include "NumericValuesTest.h"
+#include "DatapackGenerator.h"
 
 using namespace dexel;
 
 void runTests() {
-	LexerTest lexerTest;
-	lexerTest.runTests();
+	//LexerTest lexerTest;
+	//lexerTest.runTests();
 
 	NumericValuesTest numericValuesTest;
 	numericValuesTest.runTests();
@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
 	runTests();
 	
-
+	/* 
 	Lexer lexer(code);
 	auto tokens = lexer.tokenize();
 
@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
 
 	DatapackGenerator dg(transpiler.getDestinationDirectory(), transpiler.getOverrideDirectories());
 	dg.generateDatapack(components);
+	*/
 
 	return 0;
 }

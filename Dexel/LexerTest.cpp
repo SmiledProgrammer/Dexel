@@ -1,8 +1,7 @@
 #include "LexerTest.h"
 
 #include <iostream>
-#include "../main/dexel/LanguageConstants.h"
-#include "../main/dexel/MapUtils.h"
+#include "LanguageConstants.h"
 
 using namespace dexel;
 using namespace std;
@@ -29,6 +28,14 @@ const map<Token::Type, string> tokenTypeNames{
 			{Token::TYPE_RIGHT_BRACES_SEPARATOR, "Right braces"},
 			{Token::TYPE_HASH_COMMENT, "Hash"}
 };
+
+template<typename K, typename V>
+std::map<V, K> reverseMap(const std::map<K, V>& m) {
+	std::map<V, K> r;
+	for (const auto& kv : m)
+		r[kv.second] = kv.first;
+	return r;
+}
 
 map<Token::Type, char> reverseOfSymbolTokens = reverseMap(SYMBOL_TOKENS);
 

@@ -2,8 +2,8 @@
 
 #include <iostream>
 #include <map>
-#include "../main/dexel/Lexer.h"
-#include "../main/dexel/VariableAssignmentComponent.h"
+#include "Lexer.h"
+#include "VariableAssignmentComponent.h"
 
 using namespace dexel;
 using namespace std;
@@ -19,11 +19,24 @@ NumericValuesTest::NumericValuesTest() {
 	m_testCases = {
 		TestCase("3;", "3"),
 		TestCase("b;", "b"),
-		TestCase("3 + 5;", "(3 + 5)"),
+		TestCase("3 + 5;", "8"),
 		TestCase("b + 3;", "(b + 3)"),
 		TestCase("3 + b;", "(3 + b)"),
-		TestCase("(4 + 9);", "(4 + 9)"),
-		TestCase("(7 + b);", "(7 + b)")
+		TestCase("(4 + 9);", "13"),
+		TestCase("(7 + b);", "(7 + b)"),
+		TestCase("(b * c);", "(b * c)"),
+		TestCase("(c / b);", "(c / b)"),
+		TestCase("(c - b);", "(c - b)"),
+		TestCase("(a + b + c);", "((a + b) + c)"),
+		TestCase("a * b + c;", "((a * b) + c)"),
+		TestCase("(a + b * c);", "(a + (b * c))"),
+		TestCase("a - b / c;", "(a - (b / c))"),
+		TestCase("a * (b + c);", "(a * (b + c))"),
+		TestCase("(a - b) / c;", "((a - b) / c)"),
+		TestCase("(a + b) * (c - a);", "((a + b) * (c - a))"),
+		TestCase("a + 33 * c / (((d - e) + f) + 3 * 40) - g;", "((a + ((33 * c) / (((d - e) + f) + 120))) - g)"),
+		TestCase("15 - 30 / 5 * 7 * (250 - 130);", "-5025"),
+		TestCase("(((a + 8) * 16 - 4) + 3 / 3) * (17 + 4);", "(((((a + 8) * 16) - 4) + 1) * 21)")
 	};
 }
 
@@ -35,14 +48,16 @@ int NumericValuesTest::runTests() {
 		int startingIndex = 0;
 		try {
 			VariableAssignmentComponent component(tokens, startingIndex);
-			NumericValue actualNumericValue = component.parseNumericValue(startingIndex);
+			shared_ptr<NumericValue> actualNumericValue = component.parseNumericValue(startingIndex);
 			string actualString = numericValueToNumericExpressionString(actualNumericValue);
 			if (testCase.expectedNumericExpressionString != actualString) {
 				displayFailInfo(testCase.expectedNumericExpressionString, actualString);
+				failedTestsCount++;
 			}
 		} catch (string ex) {
 			string actualString = "Exception: " + ex;
 			displayFailInfo(testCase.expectedNumericExpressionString, actualString);
+			failedTestsCount++;
 		}
 	}
 	cout << "Numeric values tests run. Failed tests count: " << failedTestsCount << endl;
@@ -56,14 +71,14 @@ void NumericValuesTest::displayFailInfo(const string& expectedString, const stri
 	cout << actualString << endl;
 }
 
-string NumericValuesTest::numericValueToNumericExpressionString(NumericValue& numericValue) {
-	switch (numericValue.getNumericValueType()) {
+string NumericValuesTest::numericValueToNumericExpressionString(shared_ptr<NumericValue> numericValue) {
+	switch (numericValue->getNumericValueType()) {
 	case NumericValue::LITERAL_INTEGER_VALUE:
-		return to_string(dynamic_cast<LiteralIntegerValue&>(numericValue).intValue);
+		return to_string(dynamic_cast<LiteralIntegerValue&>(*numericValue).intValue);
 	case NumericValue::IDENTIFIER_VALUE:
-		return dynamic_cast<IdentifierValue&>(numericValue).identifier;
+		return dynamic_cast<IdentifierValue&>(*numericValue).identifier;
 	case NumericValue::OPERATION_VALUE:
-		OperationValue operationValue = dynamic_cast<OperationValue&>(numericValue);
+		OperationValue operationValue = dynamic_cast<OperationValue&>(*numericValue);
 		string operatorSymbol = operatorSymbols.find(operationValue.numericOperator)->second;
 		string leftOperandString = numericValueToNumericExpressionString(operationValue.leftOperand);
 		string rightOperandString = numericValueToNumericExpressionString(operationValue.rightOperand);

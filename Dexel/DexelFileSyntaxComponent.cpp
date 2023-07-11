@@ -19,5 +19,6 @@ void DexelFileSyntaxComponent::readComponent() {
 }
 
 string DexelFileSyntaxComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	
+	// TODO
+	return "";
 }

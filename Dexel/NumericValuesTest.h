@@ -2,7 +2,8 @@
 #define NUMERIC_VALUES_TEST_H
 
 #include <vector>
-#include "../main/dexel/NumericValues.h"
+#include <memory>
+#include "NumericValues.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ namespace dexel {
 
 	private:
 		void displayFailInfo(const string& expectedString, const string& actualString);
-		string numericValueToNumericExpressionString(NumericValue& numericValue);
+		string numericValueToNumericExpressionString(shared_ptr<NumericValue> numericValue);
 
 	};
 }

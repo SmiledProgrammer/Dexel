@@ -1,6 +1,6 @@
 #include "FunctionCallComponent.h"
 
-#include "../LanguageConstants.h"
+#include "LanguageConstants.h"
 
 using namespace dexel;
 
