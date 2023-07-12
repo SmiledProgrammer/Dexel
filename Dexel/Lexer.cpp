@@ -93,7 +93,7 @@ void Lexer::processCommand(string& expression) {
 		advance();
 		// TODO: semicolon escaping
 	} while (m_currentChar != EXPRESSION_SEPARATOR_CHAR && m_currentChar != NULL);
-	expression = combineMultipleWhitespaces(expression);
+	expression = removeNewlines(expression);
 	m_tokens.push_back(Token(Token::TYPE_COMMAND, expression));
 }
 
@@ -102,12 +102,12 @@ void Lexer::processCondition(string& expression) {
 		expression += m_currentChar;
 		advance();
 	} while (m_currentChar != CONDITION_TERMINATING_CHAR && m_currentChar != NULL);
-	expression = combineMultipleWhitespaces(expression);
+	expression = removeNewlines(expression);
 	m_tokens.push_back(Token(Token::TYPE_CONDITION, expression));
 }
 
 void Lexer::processDexelKeyword(Token::Type keywordTokenType, const string& keyword) {
-	m_tokens.push_back(Token(keywordTokenType, keyword));
+	m_tokens.push_back(Token(keywordTokenType));
 }
 
 void Lexer::processIdentifier(const string& identifier) {

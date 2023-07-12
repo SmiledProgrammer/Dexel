@@ -31,6 +31,7 @@
     <ClCompile Include="NumericValuesTest.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="StringUtilsTest.cpp" />
     <ClCompile Include="SyntaxComponent.cpp" />
     <ClCompile Include="Token.cpp" />
     <ClCompile Include="Transpiler.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="NumericValuesTest.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="StringUtilsTest.h" />
     <ClInclude Include="SyntaxComponent.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="Transpiler.h" />

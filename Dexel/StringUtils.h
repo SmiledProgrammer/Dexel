@@ -6,7 +6,7 @@
 
 using namespace std;
 
-extern string combineMultipleWhitespaces(const string& str);
+extern string removeNewlines(const string& str);
 extern string cutDexelExtensionFromFilepath(const string& str);
 
 #endif

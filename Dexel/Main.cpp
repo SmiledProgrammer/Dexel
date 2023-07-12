@@ -3,16 +3,20 @@
 #include "Parser.h"
 #include "LexerTest.h"
 #include "NumericValuesTest.h"
+#include "StringUtilsTest.h"
 #include "DatapackGenerator.h"
 
 using namespace dexel;
 
 void runTests() {
-	//LexerTest lexerTest;
-	//lexerTest.runTests();
+	LexerTest lexerTest;
+	lexerTest.runTests();
 
 	NumericValuesTest numericValuesTest;
 	numericValuesTest.runTests();
+
+	StringUtilsTest stringUtilsTest;
+	stringUtilsTest.runTests();
 }
 
 int main(int argc, char** argv) {

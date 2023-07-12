@@ -69,6 +69,7 @@ void NumericValuesTest::displayFailInfo(const string& expectedString, const stri
 	cout << expectedString << endl;
 	cout << "but actually got:" << endl;
 	cout << actualString << endl;
+	cout << endl;
 }
 
 string NumericValuesTest::numericValueToNumericExpressionString(shared_ptr<NumericValue> numericValue) {

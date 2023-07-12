@@ -1,15 +1,13 @@
 #include "StringUtils.h"
 
-string combineMultipleWhitespaces(const string& str) {
+string removeNewlines(const string& str) {
 	// TODO: ignore string literals in commands ("" or '') - but actually don't ignore newlines (\n)
 	string result = str;
 	for (int i = 0; i < result.length(); i++) {
-		if (isspace(str[i])) {
-			int whitespacesStart = i;
-			do {
-				i++;
-			} while (isspace(result[i]));
-			result = result.substr(0, whitespacesStart) + " " + result.substr(i);
+		if (result[i] == '\n') {
+			while (i < result.length() && isspace(result[i])) {
+				result = result.substr(0, i) + result.substr(i + 1);
+			}
 		}
 	}
 	return result;
