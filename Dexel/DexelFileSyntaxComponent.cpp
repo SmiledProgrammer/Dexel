@@ -12,7 +12,6 @@ void DexelFileSyntaxComponent::readComponent() {
 		Token token = getNextToken();
 		if (token.getType() == Token::TYPE_FUNCTION_KEYWORD) {
 			FunctionDefinitionComponent functionComponent(m_tokens, m_index - 1);
-			functionComponent.readComponent();
 			m_components.push_back(functionComponent);
 		}
 	}

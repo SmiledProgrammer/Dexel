@@ -34,20 +34,29 @@ namespace dexel {
 
 	private:
 		Type m_type;
+		string m_filepath;
+		int m_line, m_column;
 		string m_value;
 
 	public:
-		Token(Type type, const string& value = "");
+		Token(Type type, const string& filepath, int line, int column, const string& value = "");
 
 		static string typeToString(Type type);
 
 		inline Type getType() const { return m_type; }
+		inline const string& getFilepath() const { return m_filepath; }
+		inline int getLine() const { return m_line; }
+		inline int getColumn() const { return m_column; }
 		inline const string& getValue() const { return m_value; }
 
 		// TODO: move to source file
 		friend bool operator==(const Token& left, const Token& right) {
 			return left.getType() == right.getType() &&
 				left.getValue() == right.getValue();
+		}
+
+		friend bool operator!=(const Token& left, const Token& right) {
+			return !(left == right);
 		}
 
 	};

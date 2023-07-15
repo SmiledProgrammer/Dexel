@@ -12,12 +12,14 @@ namespace dexel {
 	class Lexer {
 	
 		string m_code;
+		string m_sourceCodeFilepath;
 		int m_position;
+		int m_line, m_column;
 		char m_currentChar;
 		vector<Token> m_tokens;
 
 	public:
-		Lexer(const string& code);
+		Lexer(const string& code, const string& sourceCodeFilepath);
 
 		vector<Token> tokenize();
 
@@ -33,6 +35,7 @@ namespace dexel {
 		void processIdentifier(const string& identifier);
 
 		bool isIdentifierCharacter(char c);
+		Token createToken(Token::Type type, const string& value = "");
 
 	};
 }

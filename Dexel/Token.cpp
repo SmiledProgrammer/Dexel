@@ -2,8 +2,8 @@
 
 using namespace dexel;
 
-Token::Token(Type type, const string& value)
-	: m_type(type), m_value(value) {}
+Token::Token(Type type, const string& filepath, int line, int column, const string& value)
+	: m_type(type), m_filepath(filepath), m_line(line), m_column(column), m_value(value) {}
 
 string Token::typeToString(Type type) {
 	switch (type) {

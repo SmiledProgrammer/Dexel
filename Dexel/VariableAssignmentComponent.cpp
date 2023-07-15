@@ -18,14 +18,16 @@ const map<NumericOperator, int> VariableAssignmentComponent::m_operatorsPreceden
 
 
 VariableAssignmentComponent::VariableAssignmentComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index) {}
+	: SyntaxComponent(tokens, index) {
+	readComponent();
+}
 
 void VariableAssignmentComponent::readComponent() {
 	int variableNameIndex = m_index;
 	checkNextTokensTypes(m_startingPattern);
 	m_variableName = m_tokens[variableNameIndex].getValue();
 	if (!isAssignmentExpressionValid()) {
-		throw string("Assignment expression is not valid.");
+		throw createException("Assignment expression is not valid.");
 	}
 	m_numericValue = *parseNumericValue(m_index);
 	m_index++;
@@ -49,39 +51,39 @@ bool VariableAssignmentComponent::isAssignmentExpressionValid() {
 		case Token::TYPE_HYPHEN_OPERATOR:
 		case Token::TYPE_ASTERISK_OPERATOR:
 		case Token::TYPE_FORWARD_SLASH_OPERATOR:
-			if (!expectedOperator) throw string("Expected operand here.");
+			if (!expectedOperator) throw createException("Expected operand here.");
 			expectedOperator = false;
 			break;
 		case Token::TYPE_IDENTIFIER:
 		case Token::TYPE_INTEGER_LITERAL:
-			if (expectedOperator) throw string("Expected operator here.");
+			if (expectedOperator) throw createException("Expected operator here.");
 			expectedOperator = true;
 			containsOperand = true;
 			break;
 		case Token::TYPE_LEFT_PARENTHESES_SEPARATOR:
-			if (expectedOperator) throw string("Expected operator here but found opening parentheses.");
+			if (expectedOperator) throw createException("Expected operator here but found opening parentheses.");
 			parenthesesDepth++;
 			break;
 		case Token::TYPE_RIGHT_PARENTHESES_SEPARATOR:
-			if (!expectedOperator) throw string("Expected operand here but found closing parentheses.");
-			if (parenthesesDepth == 0) throw string("Unexpected redundant closing parentheses.");
+			if (!expectedOperator) throw createException("Expected operand here but found closing parentheses.");
+			if (parenthesesDepth == 0) throw createException("Unexpected redundant closing parentheses.");
 			parenthesesDepth--;
 			break;
 		default:
-			throw string("Unexpected token type.");
+			throw createException("Unexpected token type.");
 		}
 		index++;
-		if (index == m_tokens.size()) throw string("Expected semicolon but got end of file.");
+		if (index == m_tokens.size()) throw createException("Expected semicolon but got end of file.");
 	}
-	if (!containsOperand) throw string("Expression is expected to contain at least one operand.");
-	if (!expectedOperator) throw string("Expression must end with an operand rather than operator.");
+	if (!containsOperand) throw createException("Expression is expected to contain at least one operand.");
+	if (!expectedOperator) throw createException("Expression must end with an operand rather than operator.");
 }
 
 shared_ptr<NumericValue> VariableAssignmentComponent::parseNumericValue(int& index) {
 	shared_ptr<NumericValue> numericValue = make_shared<NumericValue>();
 	NumericOperator lastOperator = NumericOperator::NONE;
-	while (m_tokens[index] != Token::TYPE_RIGHT_PARENTHESES_SEPARATOR &&
-		m_tokens[index] != Token::TYPE_SEMICOLON_SEPARATOR)
+	while (m_tokens[index].getType() != Token::TYPE_RIGHT_PARENTHESES_SEPARATOR &&
+		m_tokens[index].getType() != Token::TYPE_SEMICOLON_SEPARATOR)
 	{
 		switch (m_tokens[index].getType()) {
 		case Token::TYPE_PLUS_OPERATOR:
@@ -135,7 +137,7 @@ shared_ptr<NumericValue> VariableAssignmentComponent::readOperandNumericValue(in
 	case Token::TYPE_LEFT_PARENTHESES_SEPARATOR:
 		return parseNumericValue(++index);
 	}
-	throw string("Internal error. Expected identifier, literal or opening parentheses here.");
+	throw createException("Internal error. Expected identifier, literal or opening parentheses here.");
 }
 
 NumericOperator VariableAssignmentComponent::readNumericValueOperator(int index) {
@@ -145,7 +147,7 @@ NumericOperator VariableAssignmentComponent::readNumericValueOperator(int index)
 	case Token::TYPE_ASTERISK_OPERATOR: return NumericOperator::MULTIPLY;
 	case Token::TYPE_FORWARD_SLASH_OPERATOR: return NumericOperator::DIVIDE;
 	}
-	throw string("Internal error. Expected operator here.");
+	throw createException("Internal error. Expected operator here.");
 }
 
 bool VariableAssignmentComponent::hasOperatorHigherPrecedence(NumericOperator thisOperator, NumericOperator otherOperator) {

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Token.h"
+#include "ParsingException.h"
 
 namespace dexel {
 
@@ -22,6 +23,8 @@ namespace dexel {
 
 		static void setGlobalDestinationDirectoryPath(const string& dirPath);
 
+		inline int getCurrentIndex() const { return m_index; }
+
 	protected:
 		Token getNextToken();
 		vector<SyntaxComponent> readComponentsBlock();
@@ -30,6 +33,9 @@ namespace dexel {
 		
 	private:
 		SyntaxComponent createComponentFromNextToken();
+
+	protected:
+		ParsingException createException(const string& message);
 
 	};
 }

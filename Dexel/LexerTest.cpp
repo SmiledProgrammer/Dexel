@@ -47,8 +47,8 @@ LexerTest::LexerTest() {
 			"\t};\n"
 		,
 		{
-			Token(Token::TYPE_COMMAND, "tellraw @a {\"text\":\"Wonderful!\"}"),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR)
+			createToken(Token::TYPE_COMMAND, "tellraw @a {\"text\":\"Wonderful!\"}"),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR)
 		}
 	);
 
@@ -68,57 +68,57 @@ LexerTest::LexerTest() {
 		"}\n"
 		,
 		{
-			Token(Token::TYPE_FUNCTION_KEYWORD),
-			Token(Token::TYPE_IDENTIFIER, "main"),
-			Token(Token::TYPE_LEFT_PARENTHESES_SEPARATOR),
-			Token(Token::TYPE_RIGHT_PARENTHESES_SEPARATOR),
-			Token(Token::TYPE_LEFT_BRACES_SEPARATOR),
+			createToken(Token::TYPE_FUNCTION_KEYWORD),
+			createToken(Token::TYPE_IDENTIFIER, "main"),
+			createToken(Token::TYPE_LEFT_PARENTHESES_SEPARATOR),
+			createToken(Token::TYPE_RIGHT_PARENTHESES_SEPARATOR),
+			createToken(Token::TYPE_LEFT_BRACES_SEPARATOR),
 
-			Token(Token::TYPE_COMMAND, "say Hello world!"),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_COMMAND, "say Hello world!"),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_INT_KEYWORD),
-			Token(Token::TYPE_IDENTIFIER, "abc"),
-			Token(Token::TYPE_EQUALS_OPERATOR),
-			Token(Token::TYPE_INTEGER_LITERAL, "3609"),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_INT_KEYWORD),
+			createToken(Token::TYPE_IDENTIFIER, "abc"),
+			createToken(Token::TYPE_EQUALS_OPERATOR),
+			createToken(Token::TYPE_INTEGER_LITERAL, "3609"),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_COMMAND, "tellraw @a {\"text\":\"Wonderful!\"}"),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_COMMAND, "tellraw @a {\"text\":\"Wonderful!\"}"),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_INT_KEYWORD),
-			Token(Token::TYPE_IDENTIFIER, "def"),
-			Token(Token::TYPE_EQUALS_OPERATOR),
-			Token(Token::TYPE_IDENTIFIER, "abc"),
-			Token(Token::TYPE_PLUS_OPERATOR),
-			Token(Token::TYPE_INTEGER_LITERAL, "2"),
-			Token(Token::TYPE_ASTERISK_OPERATOR),
-			Token(Token::TYPE_INTEGER_LITERAL, "3"),
-			Token(Token::TYPE_HYPHEN_OPERATOR),
-			Token(Token::TYPE_INTEGER_LITERAL, "8"),
-			Token(Token::TYPE_FORWARD_SLASH_OPERATOR),
-			Token(Token::TYPE_INTEGER_LITERAL, "7"),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_INT_KEYWORD),
+			createToken(Token::TYPE_IDENTIFIER, "def"),
+			createToken(Token::TYPE_EQUALS_OPERATOR),
+			createToken(Token::TYPE_IDENTIFIER, "abc"),
+			createToken(Token::TYPE_PLUS_OPERATOR),
+			createToken(Token::TYPE_INTEGER_LITERAL, "2"),
+			createToken(Token::TYPE_ASTERISK_OPERATOR),
+			createToken(Token::TYPE_INTEGER_LITERAL, "3"),
+			createToken(Token::TYPE_HYPHEN_OPERATOR),
+			createToken(Token::TYPE_INTEGER_LITERAL, "8"),
+			createToken(Token::TYPE_FORWARD_SLASH_OPERATOR),
+			createToken(Token::TYPE_INTEGER_LITERAL, "7"),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_IF_KEYWORD),
-			Token(Token::TYPE_LEFT_PARENTHESES_SEPARATOR),
-			Token(Token::TYPE_CONDITION, "score dexel_vars def = 5"),
-			Token(Token::TYPE_RIGHT_PARENTHESES_SEPARATOR),
-			Token(Token::TYPE_LEFT_BRACES_SEPARATOR),
+			createToken(Token::TYPE_IF_KEYWORD),
+			createToken(Token::TYPE_LEFT_PARENTHESES_SEPARATOR),
+			createToken(Token::TYPE_CONDITION, "score dexel_vars def = 5"),
+			createToken(Token::TYPE_RIGHT_PARENTHESES_SEPARATOR),
+			createToken(Token::TYPE_LEFT_BRACES_SEPARATOR),
 
-			Token(Token::TYPE_COMMAND, "say Incorrect."),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_COMMAND, "say Incorrect."),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_RIGHT_BRACES_SEPARATOR),
-			Token(Token::TYPE_ELSE_KEYWORD),
-			Token(Token::TYPE_LEFT_BRACES_SEPARATOR),
+			createToken(Token::TYPE_RIGHT_BRACES_SEPARATOR),
+			createToken(Token::TYPE_ELSE_KEYWORD),
+			createToken(Token::TYPE_LEFT_BRACES_SEPARATOR),
 
-			Token(Token::TYPE_COMMAND, "say Very bad."),
-			Token(Token::TYPE_SEMICOLON_SEPARATOR),
+			createToken(Token::TYPE_COMMAND, "say Very bad."),
+			createToken(Token::TYPE_SEMICOLON_SEPARATOR),
 
-			Token(Token::TYPE_RIGHT_BRACES_SEPARATOR),
+			createToken(Token::TYPE_RIGHT_BRACES_SEPARATOR),
 
-			Token(Token::TYPE_RIGHT_BRACES_SEPARATOR)
+			createToken(Token::TYPE_RIGHT_BRACES_SEPARATOR)
 		}
 	);
 
@@ -132,7 +132,7 @@ int LexerTest::runTests() {
 	int failedTestsCount = 0;
 	for (TestCase testCase : m_testCases) {
 		vector<Token> expectedTokens = testCase.expectedTokens;
-		Lexer lexer(testCase.code);
+		Lexer lexer(testCase.code, "test");
 		vector<Token> actualTokens = lexer.tokenize();
 		if (expectedTokens != actualTokens) {
 			failedTestsCount++;
@@ -161,4 +161,8 @@ void LexerTest::displayTokenVector(const vector<Token>& tokens) {
 			cout << "    " << tokenTypeNames.find(token.getType())->second << ": " << token.getValue() << endl;
 		}
 	}
+}
+
+Token LexerTest::createToken(Token::Type type, const string& value) {
+	return Token(type, "", -1, -1, value);
 }

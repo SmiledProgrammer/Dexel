@@ -21,7 +21,9 @@ const vector<Token::Type> ConditionComponent::m_elseIfBlockStartingPattern{
 
 
 ConditionComponent::ConditionComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index) {}
+	: SyntaxComponent(tokens, index) {
+	readComponent();
+}
 
 void ConditionComponent::readComponent() {
 	int ifConditionIndex = m_index + 2;
@@ -37,6 +39,7 @@ void ConditionComponent::readComponent() {
 			vector<SyntaxComponent> elseIfBlockComponents = readComponentsBlock();
 			m_conditionBlocks.push_back(ConditionBlock(elseIfCondition, elseIfBlockComponents));
 		} else {
+			getNextToken();
 			vector<SyntaxComponent> elseBlockComponents = readComponentsBlock();
 			m_conditionBlocks.push_back(ConditionBlock(ELSE_CONDITION_STRING, elseBlockComponents));
 		}

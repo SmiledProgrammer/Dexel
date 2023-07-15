@@ -23,6 +23,7 @@
     <ClCompile Include="ConditionComponent.cpp" />
     <ClCompile Include="DatapackGenerator.cpp" />
     <ClCompile Include="DexelFileSyntaxComponent.cpp" />
+    <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FunctionCallComponent.cpp" />
     <ClCompile Include="FunctionDefinitionComponent.cpp" />
     <ClCompile Include="Lexer.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NumericValuesTest.cpp" />
     <ClCompile Include="Parser.cpp" />
+    <ClCompile Include="ParsingException.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="StringUtilsTest.cpp" />
     <ClCompile Include="SyntaxComponent.cpp" />
@@ -42,6 +44,7 @@
     <ClInclude Include="ConditionComponent.h" />
     <ClInclude Include="DatapackGenerator.h" />
     <ClInclude Include="DexelFileSyntaxComponent.h" />
+    <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FunctionCallComponent.h" />
     <ClInclude Include="FunctionDefinitionComponent.h" />
     <ClInclude Include="LanguageConstants.h" />
@@ -50,6 +53,7 @@
     <ClInclude Include="NumericValues.h" />
     <ClInclude Include="NumericValuesTest.h" />
     <ClInclude Include="Parser.h" />
+    <ClInclude Include="ParsingException.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="StringUtilsTest.h" />
     <ClInclude Include="SyntaxComponent.h" />

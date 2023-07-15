@@ -10,7 +10,9 @@ const vector<Token::Type> FunctionDefinitionComponent::m_startingPattern{
 };
 
 FunctionDefinitionComponent::FunctionDefinitionComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index) {}
+	: SyntaxComponent(tokens, index) {
+	readComponent();
+}
 
 void FunctionDefinitionComponent::readComponent() {
 	int identifierIndex = m_index + 1;

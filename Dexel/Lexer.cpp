@@ -10,9 +10,12 @@ const char COMMENT_CHAR = '#';
 const char EXPRESSION_SEPARATOR_CHAR = ';';
 const char CONDITION_TERMINATING_CHAR = ')';
 
-Lexer::Lexer(const string& code) {
+Lexer::Lexer(const string& code, const string& sourceCodeFilepath) {
 	m_code = code;
+	m_sourceCodeFilepath = sourceCodeFilepath;
 	m_position = -1;
+	m_line = 1;
+	m_column = 0;
 	m_currentChar = NULL;
 	advance();
 }
@@ -33,7 +36,7 @@ vector<Token> Lexer::tokenize() {
 				} else if (isalpha(m_currentChar)) {
 					processExpression();
 				} else {
-					return vector<Token>({ Token(Token::TYPE_UNKNOWN_SYMBOL) });
+					return vector<Token>({ createToken(Token::TYPE_UNKNOWN_SYMBOL) });
 				}
 			}
 		}
@@ -44,6 +47,12 @@ vector<Token> Lexer::tokenize() {
 void Lexer::advance() {
 	m_position++;
 	m_currentChar = m_position < m_code.length() ? m_code[m_position] : NULL;
+	if (m_currentChar == '\n') {
+		m_line++;
+		m_column = 1;
+	} else {
+		m_column++;
+	}
 }
 
 void Lexer::processComment() {
@@ -53,7 +62,7 @@ void Lexer::processComment() {
 }
 
 void Lexer::processSymbol(Token::Type symbolTokenType) {
-	m_tokens.push_back(Token(symbolTokenType));
+	m_tokens.push_back(createToken(symbolTokenType));
 	advance();
 }
 
@@ -63,7 +72,7 @@ void Lexer::processInteger() {
 		integerStr += m_currentChar;
 		advance();
 	} while (isdigit(m_currentChar));
-	m_tokens.push_back(Token(Token::TYPE_INTEGER_LITERAL, integerStr));
+	m_tokens.push_back(createToken(Token::TYPE_INTEGER_LITERAL, integerStr));
 }
 
 void Lexer::processExpression() {
@@ -94,7 +103,7 @@ void Lexer::processCommand(string& expression) {
 		// TODO: semicolon escaping
 	} while (m_currentChar != EXPRESSION_SEPARATOR_CHAR && m_currentChar != NULL);
 	expression = removeNewlines(expression);
-	m_tokens.push_back(Token(Token::TYPE_COMMAND, expression));
+	m_tokens.push_back(createToken(Token::TYPE_COMMAND, expression));
 }
 
 void Lexer::processCondition(string& expression) {
@@ -103,17 +112,21 @@ void Lexer::processCondition(string& expression) {
 		advance();
 	} while (m_currentChar != CONDITION_TERMINATING_CHAR && m_currentChar != NULL);
 	expression = removeNewlines(expression);
-	m_tokens.push_back(Token(Token::TYPE_CONDITION, expression));
+	m_tokens.push_back(createToken(Token::TYPE_CONDITION, expression));
 }
 
 void Lexer::processDexelKeyword(Token::Type keywordTokenType, const string& keyword) {
-	m_tokens.push_back(Token(keywordTokenType));
+	m_tokens.push_back(createToken(keywordTokenType));
 }
 
 void Lexer::processIdentifier(const string& identifier) {
-	m_tokens.push_back(Token(Token::TYPE_IDENTIFIER, identifier));
+	m_tokens.push_back(createToken(Token::TYPE_IDENTIFIER, identifier));
 }
 
 bool Lexer::isIdentifierCharacter(char c) {
 	return isalnum(c) || c == '_' || c == '@';
+}
+
+Token Lexer::createToken(Token::Type type, const string& value) {
+	return Token(type, m_sourceCodeFilepath, m_line, m_column, value);
 }

@@ -4,6 +4,7 @@
 #include <map>
 #include "Lexer.h"
 #include "VariableAssignmentComponent.h"
+#include "ParsingException.h"
 
 using namespace dexel;
 using namespace std;
@@ -43,7 +44,7 @@ NumericValuesTest::NumericValuesTest() {
 int NumericValuesTest::runTests() {
 	int failedTestsCount = 0;
 	for (TestCase testCase : m_testCases) {
-		Lexer lexer(testCase.code);
+		Lexer lexer(testCase.code, "test");
 		vector<Token> tokens = lexer.tokenize();
 		int startingIndex = 0;
 		try {
@@ -54,8 +55,8 @@ int NumericValuesTest::runTests() {
 				displayFailInfo(testCase.expectedNumericExpressionString, actualString);
 				failedTestsCount++;
 			}
-		} catch (string ex) {
-			string actualString = "Exception: " + ex;
+		} catch (ParsingException ex) {
+			string actualString = "Exception: " + ex.getMessage();
 			displayFailInfo(testCase.expectedNumericExpressionString, actualString);
 			failedTestsCount++;
 		}

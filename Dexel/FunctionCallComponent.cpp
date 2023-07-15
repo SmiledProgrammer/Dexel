@@ -13,7 +13,9 @@ const vector<Token::Type> FunctionCallComponent::m_functionCallPattern{
 
 
 FunctionCallComponent::FunctionCallComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index) {}
+	: SyntaxComponent(tokens, index) {
+	readComponent();
+}
 
 void FunctionCallComponent::readComponent() {
 	int functionNameIndex = m_index;

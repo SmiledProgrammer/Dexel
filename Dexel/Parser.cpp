@@ -1,6 +1,7 @@
 #include "Parser.h"
 
 #include <iostream>
+#include "ParsingException.h"
 
 using namespace dexel;
 
@@ -13,8 +14,9 @@ vector<DexelFileSyntaxComponent> Parser::parse() {
 	for (DexelFileSyntaxComponent dexelFile : m_dexelFileComponents) {
 		try {
 			dexelFile.readComponent();
-		} catch (string ex) {
-			cerr << "[ERROR] Failed to parse file \"" << dexelFile.getFilepath() << "\": " << ex << endl;
+		} catch (ParsingException ex) {
+			cerr << "[ERROR] File parsing error: " << ex.getMessage() << endl;
+			cerr << "        at file \"" << ex.getFilepath() << "\", line: " << ex.getLine() << ", column: " << ex.getColumn() << endl;
 			return vector<DexelFileSyntaxComponent>();
 		}
 	}

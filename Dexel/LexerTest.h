@@ -29,6 +29,7 @@ namespace dexel {
 	private:
 		void displayFailInfo(const vector<Token>& expectedTokens, const vector<Token>& actualTokens);
 		void displayTokenVector(const vector<Token>& tokens);
+		Token createToken(Token::Type type, const string& value = "");
 
 	};
 }

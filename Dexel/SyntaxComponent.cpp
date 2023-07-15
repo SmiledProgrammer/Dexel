@@ -10,6 +10,8 @@
 
 using namespace dexel;
 
+// TODO: Bug - gdy definiujac funkcje nie da sie zamykajacego nawiasu klamerkowego, to jakis out of range leci czy cos
+
 // TODO: check if needed
 string SyntaxComponent::m_destinationDirectoryPath = "";
 
@@ -17,11 +19,11 @@ SyntaxComponent::SyntaxComponent(vector<Token>& tokens, int index)
 	: m_tokens(tokens), m_index(index) {}
 
 void SyntaxComponent::readComponent() {
-	throw string("Unexpected internal error.");
+	throw createException("Unexpected internal error.");
 }
 
 string SyntaxComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	throw string("Unexpected internal error.");
+	throw createException("Unexpected internal error.");
 }
 
 void SyntaxComponent::setGlobalDestinationDirectoryPath(const string& dirPath) {
@@ -36,27 +38,28 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 	vector<SyntaxComponent> components;
 	Token openBrace = getNextToken();
 	if (openBrace.getType() != Token::TYPE_LEFT_BRACES_SEPARATOR) {
-		throw string("Expected beginning of braces block here.");
-		// TODO: make throws everywhere instead of printError()
+		throw createException("Expected beginning of braces block here.");
 	}
 	try {
 		while (m_tokens.at(m_index).getType() != Token::TYPE_RIGHT_BRACES_SEPARATOR) {
+			Token::Type tokenType = m_tokens.at(m_index).getType(); // TODO: usun
 			SyntaxComponent component = createComponentFromNextToken();
 			components.push_back(component);
+			m_index = component.getCurrentIndex();
 		}
 		getNextToken();
 	} catch (out_of_range ex) {
-		throw string("Expected end of braces block here.");
+		throw createException("Expected end of braces block here.");
 	}
 	return components;
 }
 
 void SyntaxComponent::checkNextTokensTypes(const vector<Token::Type>& nextTokensTypes) {
 	for (int i = 0; i < nextTokensTypes.size(); i++) {
-		Token nextTokenType = getNextToken().getType();
+		Token::Type nextTokenType = getNextToken().getType();
 		Token::Type expectedType = nextTokensTypes[i];
 		if (nextTokenType != expectedType) {
-			throw string("Expected token here of type: " + Token::typeToString(expectedType));
+			throw createException("Expected token here of type: " + Token::typeToString(expectedType));
 		}
 	}
 }
@@ -69,11 +72,17 @@ void SyntaxComponent::createMCFunctionFile(const string& functionName, const str
 }
 
 SyntaxComponent SyntaxComponent::createComponentFromNextToken() {
-	switch (getNextToken().getType()) {
+	Token::Type nextTokenType = getNextToken().getType();
+	switch (nextTokenType) {
 	case Token::TYPE_COMMAND: return CommandComponent(m_tokens, m_index - 1);
 	case Token::TYPE_IF_KEYWORD: return ConditionComponent(m_tokens, m_index - 1);
 	case Token::TYPE_IDENTIFIER: return FunctionCallComponent(m_tokens, m_index - 1);
 	case Token::TYPE_INT_KEYWORD: return VariableAssignmentComponent(m_tokens, m_index - 1);
 	}
-	throw string("Cannot parse code structure.");
+	throw createException("Cannot parse code structure.");
+}
+
+ParsingException SyntaxComponent::createException(const string& message) {
+	Token currentToken = m_tokens[m_index];
+	return ParsingException(message, currentToken.getFilepath(), currentToken.getLine(), currentToken.getColumn());
 }

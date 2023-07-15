@@ -60,10 +60,16 @@
     <ClCompile Include="VariableAssignmentComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MapUtils.cpp">
+    <ClCompile Include="StringUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StringUtils.cpp">
+    <ClCompile Include="StringUtilsTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParsingException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,9 +101,6 @@
     <ClInclude Include="LexerTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MapUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NumericValues.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -120,6 +123,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VariableAssignmentComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringUtilsTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParsingException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

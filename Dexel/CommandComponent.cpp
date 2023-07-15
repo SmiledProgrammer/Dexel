@@ -9,7 +9,9 @@ const vector<Token::Type> CommandComponent::m_commandExpressionPattern{
 
 
 CommandComponent::CommandComponent(vector<Token>& tokens, int index)
-	: SyntaxComponent(tokens, index) {}
+	: SyntaxComponent(tokens, index) {
+	readComponent();
+}
 
 void CommandComponent::readComponent() {
 	int commandIndex = m_index;

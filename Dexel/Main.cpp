@@ -1,4 +1,5 @@
 #include "Transpiler.h"
+#include "FileUtils.h"
 #include "Lexer.h"
 #include "Parser.h"
 #include "LexerTest.h"
@@ -20,22 +21,15 @@ void runTests() {
 }
 
 int main(int argc, char** argv) {
-	Transpiler transpiler = Transpiler();
-	int result = transpiler.parseArguments(argc, argv);
-	
-	string code = string("") +
-		"function main() {\n" +
-		"\tsay Hello world!;\n" +
-		"\tint abc = 3609;\n" +
-		"\ttellraw @a {\n" +
-		"\t\t\"text\":\"Wonderful!\"\n" +
-		"\t};\n" +
-		"}\n";
+	//runTests();
 
-	runTests();
-	
-	/* 
-	Lexer lexer(code);
+	Transpiler transpiler = Transpiler();
+	transpiler.parseArguments(argc, argv);
+
+	string sourceFilePath = transpiler.getSourceFile();
+	string code = readFileToString(sourceFilePath);
+
+	Lexer lexer(code, sourceFilePath);
 	auto tokens = lexer.tokenize();
 
 	SyntaxComponent::setGlobalDestinationDirectoryPath(transpiler.getDestinationDirectory());
@@ -44,7 +38,6 @@ int main(int argc, char** argv) {
 
 	DatapackGenerator dg(transpiler.getDestinationDirectory(), transpiler.getOverrideDirectories());
 	dg.generateDatapack(components);
-	*/
 
 	return 0;
 }
