@@ -11,6 +11,7 @@
 using namespace dexel;
 
 // TODO: Bug - gdy definiujac funkcje nie da sie zamykajacego nawiasu klamerkowego, to jakis out of range leci czy cos
+//       > moze rozwiazaniem byloby dodanie sprawdzania czy indeks nie wychodzi poza zakres w funkcji getNextToken() ?
 
 // TODO: check if needed
 string SyntaxComponent::m_destinationDirectoryPath = "";
@@ -42,7 +43,6 @@ vector<SyntaxComponent> SyntaxComponent::readComponentsBlock() {
 	}
 	try {
 		while (m_tokens.at(m_index).getType() != Token::TYPE_RIGHT_BRACES_SEPARATOR) {
-			Token::Type tokenType = m_tokens.at(m_index).getType(); // TODO: usun
 			SyntaxComponent component = createComponentFromNextToken();
 			components.push_back(component);
 			m_index = component.getCurrentIndex();

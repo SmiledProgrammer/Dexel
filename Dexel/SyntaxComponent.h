@@ -19,7 +19,7 @@ namespace dexel {
 
 	public:
 		virtual void readComponent();
-		virtual string convertToMCFunctionCode(const string& destinationFilepath); // TODO: sprawdz czy ten parametr jest potrzebny
+		virtual string convertToMCFunctionCode(const string& destinationFilepath);
 
 		static void setGlobalDestinationDirectoryPath(const string& dirPath);
 

@@ -40,14 +40,7 @@ void DatapackGenerator::generateEmptyDatapack(const string& datapackName) {
 void DatapackGenerator::generateMCFunctionFiles(const vector<DexelFileSyntaxComponent>& components) {
 	for (DexelFileSyntaxComponent dexelFile : components) {
 		string filepath = dexelFile.getFilepath();
-		for (SyntaxComponent component : dexelFile.getComponents()) {
-			//string callingCode = component.convertToMCFunctionCode();
-			// TODO: move this
-			/*string generatedFilepath = cutDexelExtensionFromFilepath(sourceFilepath) + "-" + component->getFunctionIdentifier() + ".mcfunction";
-			ofstream fileStream(generatedFilepath);
-			fileStream << component->convertToMCFunctionCode() << endl;
-			fileStream.close();*/
-		}
+		dexelFile.convertToMCFunctionCode(filepath);
 	}
 }
 

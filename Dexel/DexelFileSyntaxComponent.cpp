@@ -13,11 +13,21 @@ void DexelFileSyntaxComponent::readComponent() {
 		if (token.getType() == Token::TYPE_FUNCTION_KEYWORD) {
 			FunctionDefinitionComponent functionComponent(m_tokens, m_index - 1);
 			m_components.push_back(functionComponent);
+			m_index = functionComponent.getCurrentIndex();
+		} else {
+			throw createException("Dexel file can only contain function definitions.");
 		}
 	}
 }
 
 string DexelFileSyntaxComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	// TODO
+	for (FunctionDefinitionComponent component : m_components) {
+		component.convertToMCFunctionCode(m_filepath);
+		// TODO: move this
+		/*string generatedFilepath = cutDexelExtensionFromFilepath(sourceFilepath) + "-" + component->getFunctionIdentifier() + ".mcfunction";
+		ofstream fileStream(generatedFilepath);
+		fileStream << component->convertToMCFunctionCode() << endl;
+		fileStream.close();*/
+	}
 	return "";
 }

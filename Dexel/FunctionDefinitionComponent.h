@@ -14,7 +14,6 @@ namespace dexel {
 		static const vector<Token::Type> m_startingPattern;
 
 	public:
-
 		FunctionDefinitionComponent(vector<Token>& tokens, int index);
 
 		void readComponent() override;
