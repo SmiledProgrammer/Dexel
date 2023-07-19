@@ -12,7 +12,7 @@ namespace dexel {
 
 		string m_sourceFile = "";
 		string m_destinationDirectory = filesystem::current_path().string();
-		bool m_overrideDirectories = false;
+		bool m_overrideDirectories = true;
 		bool m_nativeCommands = false;
 
 	public:

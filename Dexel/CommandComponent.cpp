@@ -20,6 +20,6 @@ void CommandComponent::readComponent() {
 	m_commandExpression = commandToken.getValue();
 }
 
-string CommandComponent::convertToMCFunctionCode(const string& destinationFilepath) {
+string CommandComponent::convertToMCFunctionCode(const string& functionNamePrefix) {
 	return m_commandExpression + "\n";
 }

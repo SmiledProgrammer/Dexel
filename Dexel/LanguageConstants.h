@@ -9,6 +9,7 @@
 namespace dexel {
 
 	const string DEXEL_DATAPACK_NAMESPACE = "dexel";
+	const string DEXEL_DATAPACK_NAME = "DexelDatapack";
 
 	const map<char, Token::Type> SYMBOL_TOKENS{
 		{'=', Token::TYPE_EQUALS_OPERATOR},
@@ -53,7 +54,7 @@ namespace dexel {
 		"fill",
 		"fillbiome",
 		"forceload",
-		// "function", // overriden by Dexel language
+		// "function", // overridden by Dexel language
 		"gamemode",
 		"gamerule",
 		"give",

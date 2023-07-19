@@ -19,7 +19,8 @@ namespace dexel {
 		void generateDatapack(const vector<DexelFileSyntaxComponent>& components);
 
 	private:
-		void generateEmptyDatapack(const string& datapackName);
+		void generateEmptyDatapack();
+		void generateDefaultInitFunction();
 		void generateMCFunctionFiles(const vector<DexelFileSyntaxComponent>& components);
 
 		void createPackMCMetaFile(const string& pathStr);

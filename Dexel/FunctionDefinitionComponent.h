@@ -9,7 +9,7 @@ namespace dexel {
 	class FunctionDefinitionComponent : public SyntaxComponent {
 
 		string m_functionName;
-		vector<SyntaxComponent> m_insideFunctionComponents;
+		vector<shared_ptr<SyntaxComponent>> m_insideFunctionComponents;
 
 		static const vector<Token::Type> m_startingPattern;
 
@@ -17,7 +17,7 @@ namespace dexel {
 		FunctionDefinitionComponent(vector<Token>& tokens, int index);
 
 		void readComponent() override;
-		string convertToMCFunctionCode(const string& destinationFilepath) override;
+		string convertToMCFunctionCode(const string& functionNamePrefix) override;
 
 	};
 }

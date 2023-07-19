@@ -16,25 +16,47 @@ DatapackGenerator::DatapackGenerator(const string& destinationDirectory, bool ov
 	: m_destinationDirectory(destinationDirectory), m_overrideDirectories(overrideDirectories) {}
 
 void DatapackGenerator::generateDatapack(const vector<DexelFileSyntaxComponent>& components) {
-	generateEmptyDatapack("DexelDatapack");
+	generateEmptyDatapack();
+	generateDefaultInitFunction();
 	generateMCFunctionFiles(components);
 }
 
-void DatapackGenerator::generateEmptyDatapack(const string& datapackName) {
-	string functionsPathStr = "\\" + datapackName + "\\data\\" + DEXEL_DATAPACK_NAMESPACE + "\\functions";
+void DatapackGenerator::generateEmptyDatapack() {
+	string functionsPathStr = "\\" + DEXEL_DATAPACK_NAME + "\\data\\" + DEXEL_DATAPACK_NAMESPACE + "\\functions";
 	string absoluteFunctionsPathStr = m_destinationDirectory + functionsPathStr;
-	if (fs::is_directory(fs::path(absoluteFunctionsPathStr))) {
-		cout << "[WARN] Functions directory already exists and will not be overriden." << endl;
-	} else {
+	if (m_overrideDirectories || !fs::is_directory(fs::path(absoluteFunctionsPathStr))) {
 		fs::current_path(fs::path(m_destinationDirectory));
 		fs::create_directories("." + functionsPathStr);
 	}
-	string absoluteMetaPathStr = m_destinationDirectory + "\\" + datapackName + "\\pack.mcmeta";
-	if (fs::is_regular_file(fs::path(absoluteMetaPathStr))) {
-		cout << "[WARN] pack.mcmeta file already exists and will not be overriden." << endl;
-	} else {
+	string absoluteMetaPathStr = m_destinationDirectory + "\\" + DEXEL_DATAPACK_NAME + "\\pack.mcmeta";
+	if (m_overrideDirectories || !fs::is_regular_file(fs::path(absoluteMetaPathStr))) {
 		createPackMCMetaFile(absoluteMetaPathStr);
 	}
+}
+
+void DatapackGenerator::generateDefaultInitFunction() {
+	string initFunctionPath = m_destinationDirectory + "\\" + DEXEL_DATAPACK_NAME + "\\data\\" + DEXEL_DATAPACK_NAMESPACE + "\\functions\\dexel-init.mcfunction";
+	ofstream initFunctionStream(initFunctionPath);
+	initFunctionStream << "scoreboard objectives add dexel_vars dummy" << endl;
+	initFunctionStream << "scoreboard objectives add dexel_helpers dummy" << endl;
+	initFunctionStream << "scoreboard players set .condition_met_counter dexel_helpers 0" << endl;
+	initFunctionStream.close();
+
+	string functionConfigurationDirectoryPath = "\\" + DEXEL_DATAPACK_NAME + "\\data\\minecraft\\tags\\functions";
+	string absoluteFunctionConfigurationDirectoryPath = m_destinationDirectory + functionConfigurationDirectoryPath;
+	if (m_overrideDirectories || !fs::is_directory(fs::path(absoluteFunctionConfigurationDirectoryPath))) {
+		fs::current_path(fs::path(m_destinationDirectory));
+		fs::create_directories("." + functionConfigurationDirectoryPath);
+	}
+
+	string loadConfigurationPath = absoluteFunctionConfigurationDirectoryPath + "\\load.json";
+	ofstream loadConfigurationStream(loadConfigurationPath);
+	loadConfigurationStream << "{" << endl;
+	loadConfigurationStream << TAB << "\"values\": [" << endl;
+	loadConfigurationStream << TAB << TAB << "\"dexel:dexel-init\"" << endl;
+	loadConfigurationStream << TAB << "]" << endl;
+	loadConfigurationStream << "}" << endl;
+	loadConfigurationStream.close();
 }
 
 void DatapackGenerator::generateMCFunctionFiles(const vector<DexelFileSyntaxComponent>& components) {

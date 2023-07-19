@@ -15,7 +15,7 @@ namespace dexel {
 		FunctionCallComponent(vector<Token>& tokens, int index);
 
 		void readComponent() override;
-		string convertToMCFunctionCode(const string& destinationFilepath) override;
+		string convertToMCFunctionCode(const string& functionNamePrefix) override;
 
 	};
 }

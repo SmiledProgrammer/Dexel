@@ -11,7 +11,7 @@ Parser::Parser(vector<Token>& tokens, const string& filepath) {
 }
 
 vector<DexelFileSyntaxComponent> Parser::parse() {
-	for (DexelFileSyntaxComponent dexelFile : m_dexelFileComponents) {
+	for (DexelFileSyntaxComponent& dexelFile : m_dexelFileComponents) {
 		try {
 			dexelFile.readComponent();
 		} catch (ParsingException ex) {

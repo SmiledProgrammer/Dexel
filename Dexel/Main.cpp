@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 	Lexer lexer(code, sourceFilePath);
 	auto tokens = lexer.tokenize();
 
-	SyntaxComponent::setGlobalDestinationDirectoryPath(transpiler.getDestinationDirectory());
+	SyntaxComponent::setGlobalSettings(transpiler.getDestinationDirectory(), transpiler.getOverrideDirectories());
 	Parser parser(tokens, transpiler.getSourceFile());
 	auto components = parser.parse();
 

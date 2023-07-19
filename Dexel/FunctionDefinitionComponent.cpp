@@ -21,7 +21,9 @@ void FunctionDefinitionComponent::readComponent() {
 	m_insideFunctionComponents = readComponentsBlock();
 }
 
-string FunctionDefinitionComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	// TODO
+string FunctionDefinitionComponent::convertToMCFunctionCode(const string& functionNamePrefix) {
+	string functionName = functionNamePrefix + m_functionName;
+	string code = convertComponentsBlockToMCFunctionCode(functionName, m_insideFunctionComponents);
+	createMCFunctionFile(functionName, code);
 	return "";
 }

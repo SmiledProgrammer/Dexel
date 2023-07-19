@@ -14,7 +14,7 @@ namespace dexel {
 		DexelFileSyntaxComponent(vector<Token>& tokens, const string& filepath);
 
 		void readComponent() override;
-		string convertToMCFunctionCode(const string& destinationFilepath) override;
+		string convertToMCFunctionCode(const string& functionNamePrefix) override;
 
 		inline const string& getFilepath() const { return m_filepath; }
 

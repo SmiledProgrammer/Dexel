@@ -10,11 +10,13 @@ namespace dexel {
 		static const vector<Token::Type> m_ifBlockStartingPattern;
 		static const vector<Token::Type> m_elseIfBlockStartingPattern;
 
+		static int m_mcFunctionConditionCounter;
+
 		struct ConditionBlock {
 			string condition;
-			vector<SyntaxComponent> insideComponents;
+			vector<shared_ptr<SyntaxComponent>> insideComponents;
 
-			ConditionBlock(const string& condition, const vector<SyntaxComponent>& insideBlockComponents)
+			ConditionBlock(const string& condition, const vector<shared_ptr<SyntaxComponent>>& insideBlockComponents)
 				: condition(condition), insideComponents(insideBlockComponents) {}
 		};
 
@@ -24,7 +26,10 @@ namespace dexel {
 		ConditionComponent(vector<Token>& tokens, int index);
 
 		void readComponent() override;
-		string convertToMCFunctionCode(const string& destinationFilepath) override;
+		string convertToMCFunctionCode(const string& functionNamePrefix) override;
+
+	private:
+		static string getNextConditionFunctionName(const string& functionNamePrefix);
 
 	};
 }

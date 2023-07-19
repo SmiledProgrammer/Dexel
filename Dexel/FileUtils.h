@@ -5,6 +5,6 @@
 
 using namespace std;
 
-string readFileToString(const string& absolutePath);
+extern string readFileToString(const string& absolutePath); // TODO: sprawdz czy extern potrzebne
 
 #endif

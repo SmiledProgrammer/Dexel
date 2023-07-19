@@ -1,5 +1,7 @@
 #include "VariableAssignmentComponent.h"
 
+#include <sstream>
+
 using namespace dexel;
 
 const vector<Token::Type> VariableAssignmentComponent::m_startingPattern{
@@ -23,19 +25,23 @@ VariableAssignmentComponent::VariableAssignmentComponent(vector<Token>& tokens, 
 }
 
 void VariableAssignmentComponent::readComponent() {
-	int variableNameIndex = m_index;
+	int variableNameIndex = m_index + 1;
 	checkNextTokensTypes(m_startingPattern);
 	m_variableName = m_tokens[variableNameIndex].getValue();
 	if (!isAssignmentExpressionValid()) {
 		throw createException("Assignment expression is not valid.");
 	}
-	m_numericValue = *parseNumericValue(m_index);
+	m_numericValue = parseNumericValue(m_index);
 	m_index++;
 }
 
-string VariableAssignmentComponent::convertToMCFunctionCode(const string& destinationFilepath) {
-	// TODO
-	return "";
+string VariableAssignmentComponent::convertToMCFunctionCode(const string& functionNamePrefix) {
+	stringstream code;
+	m_numericValueConversionCounter = 0;
+	NumericValueConversionResult numericValueConversionResult = convertNumericValueToMCFunctionCode(m_numericValue);
+	code << numericValueConversionResult.code;
+	code << "scoreboard players operation " << m_variableName << " dexel_vars = " << numericValueConversionResult.outcomeScoreLocation << endl;
+	return code.str();
 }
 
 // TODO: OBSLUGA LICZB Z MINUSEM!!! (UJEMNYCH)
@@ -77,6 +83,7 @@ bool VariableAssignmentComponent::isAssignmentExpressionValid() {
 	}
 	if (!containsOperand) throw createException("Expression is expected to contain at least one operand.");
 	if (!expectedOperator) throw createException("Expression must end with an operand rather than operator.");
+	return true;
 }
 
 shared_ptr<NumericValue> VariableAssignmentComponent::parseNumericValue(int& index) {
@@ -181,4 +188,51 @@ shared_ptr<NumericValue> VariableAssignmentComponent::tryToSimplifyOperationValu
 		}
 	}
 	return operationValue;
+}
+
+VariableAssignmentComponent::NumericValueConversionResult VariableAssignmentComponent::convertNumericValueToMCFunctionCode(shared_ptr<NumericValue> numericValue) {
+	switch (numericValue->getNumericValueType()) {
+	case NumericValue::LITERAL_INTEGER_VALUE:
+	{
+		string helperVariableName = ".const-" + getNextNumericValueConversionIdentifier();
+		LiteralIntegerValue literalIntegerValue = dynamic_cast<LiteralIntegerValue&>(*numericValue);
+		string outcomeScoreLocation = helperVariableName + " dexel_helpers";
+		stringstream code;
+		code << "scoreboard players set " << outcomeScoreLocation << " " << literalIntegerValue.intValue << endl;
+		return NumericValueConversionResult(code.str(), outcomeScoreLocation);
+	}
+	case NumericValue::IDENTIFIER_VALUE:
+	{
+		IdentifierValue identifierValue = dynamic_cast<IdentifierValue&>(*numericValue);
+		string outcomeScoreLocation = identifierValue.identifier + " dexel_vars";
+		return NumericValueConversionResult("", outcomeScoreLocation);
+	}
+	case NumericValue::OPERATION_VALUE:
+	{
+		OperationValue operationValue = dynamic_cast<OperationValue&>(*numericValue);
+		stringstream code;
+		NumericValueConversionResult leftResult = convertNumericValueToMCFunctionCode(operationValue.leftOperand);
+		NumericValueConversionResult rightResult = convertNumericValueToMCFunctionCode(operationValue.rightOperand);
+		code << leftResult.code << rightResult.code;
+		string operatorString = getOperatorString(operationValue.numericOperator);
+		code << "scoreboard players operation " << leftResult.outcomeScoreLocation << " " << operatorString << " " << rightResult.outcomeScoreLocation << endl;
+		string outcomeScoreLocation = leftResult.outcomeScoreLocation;
+		return NumericValueConversionResult(code.str(), outcomeScoreLocation);
+	}
+	}
+	throw createException("Internal MCFunction conversion error.");
+}
+
+string VariableAssignmentComponent::getNextNumericValueConversionIdentifier() {
+	return to_string(m_numericValueConversionCounter++);
+}
+
+string VariableAssignmentComponent::getOperatorString(NumericOperator numericOperator) {
+	switch (numericOperator) {
+	case NumericOperator::ADD: return "+=";
+	case NumericOperator::SUBTRACT: return "-=";
+	case NumericOperator::MULTIPLY: return "*=";
+	case NumericOperator::DIVIDE: return "/=";
+	}
+	throw createException("Internal MCFunction conversion error.");
 }

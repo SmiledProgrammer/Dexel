@@ -20,14 +20,9 @@ void DexelFileSyntaxComponent::readComponent() {
 	}
 }
 
-string DexelFileSyntaxComponent::convertToMCFunctionCode(const string& destinationFilepath) {
+string DexelFileSyntaxComponent::convertToMCFunctionCode(const string& functionNamePrefix) {
 	for (FunctionDefinitionComponent component : m_components) {
-		component.convertToMCFunctionCode(m_filepath);
-		// TODO: move this
-		/*string generatedFilepath = cutDexelExtensionFromFilepath(sourceFilepath) + "-" + component->getFunctionIdentifier() + ".mcfunction";
-		ofstream fileStream(generatedFilepath);
-		fileStream << component->convertToMCFunctionCode() << endl;
-		fileStream.close();*/
+		component.convertToMCFunctionCode("");
 	}
 	return "";
 }

@@ -23,6 +23,6 @@ void FunctionCallComponent::readComponent() {
 	m_functionName = m_tokens[functionNameIndex].getValue();
 }
 
-string FunctionCallComponent::convertToMCFunctionCode(const string& destinationFilepath) {
+string FunctionCallComponent::convertToMCFunctionCode(const string& functionNamePrefix) {
 	return "function " + DEXEL_DATAPACK_NAMESPACE + ":" + m_functionName + "\n";
 }
