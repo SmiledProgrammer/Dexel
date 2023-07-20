@@ -13,9 +13,6 @@
 using namespace std;
 using namespace dexel;
 
-// TODO: Bug - gdy definiujac funkcje nie da sie zamykajacego nawiasu klamerkowego, to jakis out of range leci czy cos
-//       > moze rozwiazaniem byloby dodanie sprawdzania czy indeks nie wychodzi poza zakres w funkcji getNextToken() ?
-
 string SyntaxComponent::m_outputFunctionsDirectoryPath = "";
 bool SyntaxComponent::m_overrideFiles = true;
 

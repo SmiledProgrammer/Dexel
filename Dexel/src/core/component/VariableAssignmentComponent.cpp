@@ -51,8 +51,6 @@ string VariableAssignmentComponent::convertToMCFunctionCode(const string& functi
 	return code.str();
 }
 
-// TODO: OBSLUGA LICZB Z MINUSEM!!! (UJEMNYCH)
-
 bool VariableAssignmentComponent::isAssignmentExpressionValid() {
 	int index = m_index;
 	bool containsOperand = false;
@@ -138,7 +136,6 @@ shared_ptr<NumericValue> VariableAssignmentComponent::parseNumericValue(int& ind
 		}
 		index++;
 	}
-	//index++; // TODO: sprawdz czy potrzebne (ale raczej nie, bo generuje blad, kiedy odkomentowane)
 	return tryToSimplifyNumericValue(numericValue);
 }
 

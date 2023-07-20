@@ -80,7 +80,6 @@ void Lexer::processExpression() {
 	do {
 		expression += m_currentChar;
 		advance();
-		// TODO: semicolon escaping
 	} while (isIdentifierCharacter(m_currentChar));
 	if (COMMAND_KEYWORDS.contains(expression)) {
 		processCommand(expression);
@@ -100,7 +99,6 @@ void Lexer::processCommand(string& expression) {
 	do {
 		expression += m_currentChar;
 		advance();
-		// TODO: semicolon escaping
 	} while (m_currentChar != EXPRESSION_SEPARATOR_CHAR && m_currentChar != NULL);
 	expression = removeNewlines(expression);
 	m_tokens.push_back(createToken(Token::TYPE_COMMAND, expression));
