@@ -71,7 +71,7 @@ void DatapackGenerator::createPackMCMetaFile(const string& pathStr) {
 	fileStream << "{" << endl;
 	fileStream << TAB << "\"pack\": {" << endl;
 	fileStream << TAB << TAB << "\"pack_format\": 10," << endl;
-	fileStream << TAB << TAB << "\"description\": \"Datapack created with Dexel language\"," << endl;
+	fileStream << TAB << TAB << "\"description\": \"Datapack created with Dexel language\"" << endl;
 	fileStream << TAB << "}" << endl;
 	fileStream << "}" << endl;
 	fileStream.close();
