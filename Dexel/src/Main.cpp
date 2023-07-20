@@ -1,11 +1,11 @@
-#include "Transpiler.h"
-#include "FileUtils.h"
-#include "Lexer.h"
-#include "Parser.h"
-#include "LexerTest.h"
-#include "NumericValuesTest.h"
-#include "StringUtilsTest.h"
-#include "DatapackGenerator.h"
+#include "core/Transpiler.h"
+#include "core/FileUtils.h"
+#include "core/Lexer.h"
+#include "core/Parser.h"
+#include "test/LexerTest.h"
+#include "test/NumericValuesTest.h"
+#include "test/StringUtilsTest.h"
+#include "core/DatapackGenerator.h"
 
 using namespace dexel;
 

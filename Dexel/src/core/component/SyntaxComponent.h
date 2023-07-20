@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <memory>
-#include "Token.h"
-#include "ParsingException.h"
+#include "../Token.h"
+#include "../ParsingException.h"
 
 namespace dexel {
 

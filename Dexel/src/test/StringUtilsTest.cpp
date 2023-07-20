@@ -1,7 +1,7 @@
 #include "StringUtilsTest.h"
 
 #include <iostream>
-#include "StringUtils.h"
+#include "../core/StringUtils.h"
 
 using namespace dexel;
 using namespace std;

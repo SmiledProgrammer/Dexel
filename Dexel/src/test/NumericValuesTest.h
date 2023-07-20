@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <memory>
-#include "NumericValues.h"
+#include "../core/NumericValues.h"
 
 using namespace std;
 

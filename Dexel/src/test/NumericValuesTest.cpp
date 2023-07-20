@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <map>
-#include "Lexer.h"
-#include "VariableAssignmentComponent.h"
-#include "ParsingException.h"
+#include "../core/Lexer.h"
+#include "../core/component/VariableAssignmentComponent.h"
+#include "../core/ParsingException.h"
 
 using namespace dexel;
 using namespace std;

@@ -1,7 +1,7 @@
 #include "ConditionComponent.h"
 
 #include <sstream>
-#include "LanguageConstants.h"
+#include "../LanguageConstants.h"
 
 using namespace dexel;
 

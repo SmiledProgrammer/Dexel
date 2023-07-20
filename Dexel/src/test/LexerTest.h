@@ -2,7 +2,7 @@
 #define LEXER_TEST_H
 
 #include <string>
-#include "Lexer.h"
+#include "../core/Lexer.h"
 
 using namespace std;
 

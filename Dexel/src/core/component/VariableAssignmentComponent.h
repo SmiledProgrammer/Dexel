@@ -4,7 +4,7 @@
 #include <map>
 #include <memory>
 #include "SyntaxComponent.h"
-#include "NumericValues.h"
+#include "../NumericValues.h"
 
 namespace dexel {
 

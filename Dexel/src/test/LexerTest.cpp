@@ -1,7 +1,7 @@
 #include "LexerTest.h"
 
 #include <iostream>
-#include "LanguageConstants.h"
+#include "../core/LanguageConstants.h"
 
 using namespace dexel;
 using namespace std;

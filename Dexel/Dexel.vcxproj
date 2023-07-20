@@ -19,46 +19,46 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CommandComponent.cpp" />
-    <ClCompile Include="ConditionComponent.cpp" />
-    <ClCompile Include="DatapackGenerator.cpp" />
-    <ClCompile Include="DexelFileSyntaxComponent.cpp" />
-    <ClCompile Include="FileUtils.cpp" />
-    <ClCompile Include="FunctionCallComponent.cpp" />
-    <ClCompile Include="FunctionDefinitionComponent.cpp" />
-    <ClCompile Include="Lexer.cpp" />
-    <ClCompile Include="LexerTest.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="NumericValuesTest.cpp" />
-    <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="StringUtils.cpp" />
-    <ClCompile Include="StringUtilsTest.cpp" />
-    <ClCompile Include="SyntaxComponent.cpp" />
-    <ClCompile Include="Token.cpp" />
-    <ClCompile Include="Transpiler.cpp" />
-    <ClCompile Include="VariableAssignmentComponent.cpp" />
+    <ClCompile Include="src/core/component/CommandComponent.cpp" />
+    <ClCompile Include="src/core/component/ConditionComponent.cpp" />
+    <ClCompile Include="src/core/DatapackGenerator.cpp" />
+    <ClCompile Include="src/core/component/DexelFileSyntaxComponent.cpp" />
+    <ClCompile Include="src/core/FileUtils.cpp" />
+    <ClCompile Include="src/core/component/FunctionCallComponent.cpp" />
+    <ClCompile Include="src/core/component/FunctionDefinitionComponent.cpp" />
+    <ClCompile Include="src/core/Lexer.cpp" />
+    <ClCompile Include="src/test/LexerTest.cpp" />
+    <ClCompile Include="src/Main.cpp" />
+    <ClCompile Include="src/test/NumericValuesTest.cpp" />
+    <ClCompile Include="src/core/Parser.cpp" />
+    <ClCompile Include="src/core/StringUtils.cpp" />
+    <ClCompile Include="src/test/StringUtilsTest.cpp" />
+    <ClCompile Include="src/core/component/SyntaxComponent.cpp" />
+    <ClCompile Include="src/core/Token.cpp" />
+    <ClCompile Include="src/core/Transpiler.cpp" />
+    <ClCompile Include="src/core/component/VariableAssignmentComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommandComponent.h" />
-    <ClInclude Include="ConditionComponent.h" />
-    <ClInclude Include="DatapackGenerator.h" />
-    <ClInclude Include="DexelFileSyntaxComponent.h" />
-    <ClInclude Include="FileUtils.h" />
-    <ClInclude Include="FunctionCallComponent.h" />
-    <ClInclude Include="FunctionDefinitionComponent.h" />
-    <ClInclude Include="LanguageConstants.h" />
-    <ClInclude Include="Lexer.h" />
-    <ClInclude Include="LexerTest.h" />
-    <ClInclude Include="NumericValues.h" />
-    <ClInclude Include="NumericValuesTest.h" />
-    <ClInclude Include="Parser.h" />
-    <ClInclude Include="ParsingException.h" />
-    <ClInclude Include="StringUtils.h" />
-    <ClInclude Include="StringUtilsTest.h" />
-    <ClInclude Include="SyntaxComponent.h" />
-    <ClInclude Include="Token.h" />
-    <ClInclude Include="Transpiler.h" />
-    <ClInclude Include="VariableAssignmentComponent.h" />
+    <ClInclude Include="src/core/component/CommandComponent.h" />
+    <ClInclude Include="src/core/component/ConditionComponent.h" />
+    <ClInclude Include="src/core/DatapackGenerator.h" />
+    <ClInclude Include="src/core/component/DexelFileSyntaxComponent.h" />
+    <ClInclude Include="src/core/FileUtils.h" />
+    <ClInclude Include="src/core/component/FunctionCallComponent.h" />
+    <ClInclude Include="src/core/component/FunctionDefinitionComponent.h" />
+    <ClInclude Include="src/core/LanguageConstants.h" />
+    <ClInclude Include="src/core/Lexer.h" />
+    <ClInclude Include="src/test/LexerTest.h" />
+    <ClInclude Include="src/core/NumericValues.h" />
+    <ClInclude Include="src/test/NumericValuesTest.h" />
+    <ClInclude Include="src/core/Parser.h" />
+    <ClInclude Include="src/core/ParsingException.h" />
+    <ClInclude Include="src/core/StringUtils.h" />
+    <ClInclude Include="src/test/StringUtilsTest.h" />
+    <ClInclude Include="src/core/component/SyntaxComponent.h" />
+    <ClInclude Include="src/core/Token.h" />
+    <ClInclude Include="src/core/Transpiler.h" />
+    <ClInclude Include="src/core/component/VariableAssignmentComponent.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

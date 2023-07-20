@@ -8,8 +8,9 @@
 #include "CommandComponent.h"
 #include "ConditionComponent.h"
 #include "VariableAssignmentComponent.h"
-#include "LanguageConstants.h"
+#include "../LanguageConstants.h"
 
+using namespace std;
 using namespace dexel;
 
 // TODO: Bug - gdy definiujac funkcje nie da sie zamykajacego nawiasu klamerkowego, to jakis out of range leci czy cos
