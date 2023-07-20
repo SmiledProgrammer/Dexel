@@ -1,4 +1,4 @@
-#ifndef PARSING_EXCEPTION_H
+﻿#ifndef PARSING_EXCEPTION_H
 #define PARSING_EXCEPTION_H
 
 #include <string>
@@ -7,6 +7,11 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa wyjątku parsowania.
+	 *
+	 * Klasa pomocnicza zawierająca potrzebne dane wyjątków występujących przy parsowaniu.
+	 */
 	class ParsingException {
 
 		string m_message;

@@ -1,4 +1,4 @@
-#ifndef FUNCTION_DEFINITION_COMPONENT_H
+﻿#ifndef FUNCTION_DEFINITION_COMPONENT_H
 #define FUNCTION_DEFINITION_COMPONENT_H
 
 #include <vector>
@@ -6,6 +6,11 @@
 
 namespace dexel {
 
+	/**
+	 * \brief Komponent parsera obsługujący definiowanie funkcji.
+	 *
+	 * Klasa służąca do parsowania i generowania kodu odpowiadającego za zdefiniowanie funkcji.
+	 */
 	class FunctionDefinitionComponent : public SyntaxComponent {
 
 		string m_functionName;

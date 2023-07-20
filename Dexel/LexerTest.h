@@ -1,4 +1,4 @@
-#ifndef LEXER_TEST_H
+﻿#ifndef LEXER_TEST_H
 #define LEXER_TEST_H
 
 #include <string>
@@ -8,6 +8,11 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa testów analizy składniowej.
+	 *
+	 * Klasa testowa do przeprowadzania testów analizy składniowej.
+	 */
 	class LexerTest {
 	public:
 		struct TestCase {

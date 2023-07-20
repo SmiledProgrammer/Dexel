@@ -1,4 +1,4 @@
-#ifndef TOKEN_H
+﻿#ifndef TOKEN_H
 #define TOKEN_H
 
 #include <string>
@@ -7,8 +7,18 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa tokenu języka Dexel.
+	 *
+	 * Klasa reprezentująca token języka Dexel.
+	 */
 	class Token {
 	public:
+		/**
+		 * \brief Typ wyliczeniowy typu tokena.
+		 *
+		 * Typ wyliczeniowy przedstawiający typ tokena języka Dexel.
+		 */
 		enum Type {
 			TYPE_UNKNOWN_SYMBOL,
 			TYPE_COMMAND,
@@ -41,6 +51,14 @@ namespace dexel {
 	public:
 		Token(Type type, const string& filepath, int line, int column, const string& value = "");
 
+		/**
+		 * \brief Funkcja zwrająca tekst danego typu tokena.
+		 *
+		 * Funkcja zwrająca tekst danego typu tokena.
+		 *
+		 * \param type - Typ tokena.
+		 * \return Tekst danego typu tokena.
+		 */
 		static string typeToString(Type type);
 
 		inline Type getType() const { return m_type; }
@@ -49,7 +67,6 @@ namespace dexel {
 		inline int getColumn() const { return m_column; }
 		inline const string& getValue() const { return m_value; }
 
-		// TODO: move to source file
 		friend bool operator==(const Token& left, const Token& right) {
 			return left.getType() == right.getType() &&
 				left.getValue() == right.getValue();

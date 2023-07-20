@@ -1,10 +1,15 @@
-#ifndef COMMAND_COMPONENT_H
+﻿#ifndef COMMAND_COMPONENT_H
 #define COMMAND_COMPONENT_H
 
 #include "SyntaxComponent.h"
 
 namespace dexel {
 
+	/**
+	 * \brief Komponent parsera obsługujący użycie komendy.
+	 * 
+	 * Klasa służąca do parsowania i generowania kodu odpowiadającego za użycie komendy z języka MCFunction.
+	 */
 	class CommandComponent : public SyntaxComponent {
 
 		static const vector<Token::Type> m_commandExpressionPattern;

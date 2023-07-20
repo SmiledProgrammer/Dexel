@@ -1,4 +1,4 @@
-#ifndef NUMERIC_VALUES_TEST_H
+﻿#ifndef NUMERIC_VALUES_TEST_H
 #define NUMERIC_VALUES_TEST_H
 
 #include <vector>
@@ -9,6 +9,11 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa testów wartości numerycznych.
+	 *
+	 * Klasa testowa do przeprowadzania testów parsowania wyrażeń numerycznych.
+	 */
 	class NumericValuesTest {
 	public:
 		struct TestCase {

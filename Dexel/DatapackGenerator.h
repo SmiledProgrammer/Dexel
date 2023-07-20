@@ -1,4 +1,4 @@
-#ifndef DATAPACK_GENERATOR_H
+﻿#ifndef DATAPACK_GENERATOR_H
 #define DATAPACK_GENERATOR_H
 
 #include <string>
@@ -8,6 +8,12 @@ using namespace std;
 
 namespace dexel {
 
+
+	/**
+	 * \brief Klasa do generowania paczek zasobów.
+	 *
+	 * Klasa służąca do generowania od początku paczki zasobów.
+	 */
 	class DatapackGenerator {
 
 		string m_destinationDirectory;
@@ -16,6 +22,13 @@ namespace dexel {
 	public:
 		DatapackGenerator(const string& destinationDirectory, bool overrideDirectories);
 
+		/**
+		 * \brief Funkcja generująca paczkę zasobów.
+		 *
+		 * Funkcja generująca od początku całą paczkę zasobów.
+		 *
+		 * \param components - Komponenty plików języka Dexel będące wynikiem parsowania.
+		 */
 		void generateDatapack(const vector<DexelFileSyntaxComponent>& components);
 
 	private:

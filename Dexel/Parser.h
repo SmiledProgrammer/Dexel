@@ -1,4 +1,4 @@
-#ifndef PARSER_H
+﻿#ifndef PARSER_H
 #define PARSER_H
 
 #include <vector>
@@ -7,6 +7,11 @@
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa do parsowania.
+	 *
+	 * Klasa służąca do parsowania tokenów języka Dexel.
+	 */
 	class Parser {
 
 		vector<DexelFileSyntaxComponent> m_dexelFileComponents;
@@ -14,6 +19,13 @@ namespace dexel {
 	public:
 		Parser(vector<Token>& tokens, const string& filepath);
 
+		/**
+		 * \brief Funkcja do parsowania.
+		 *
+		 * Funkcja parsująca tokeny języka Dexel.
+		 *
+		 * \return Lista komponentów plików języka Dexel.
+		 */
 		vector<DexelFileSyntaxComponent> parse();
 	};
 }

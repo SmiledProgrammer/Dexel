@@ -1,4 +1,4 @@
-#ifndef VARIABLE_ASSIGNMENT_COMPONENT_H
+﻿#ifndef VARIABLE_ASSIGNMENT_COMPONENT_H
 #define VARIABLE_ASSIGNMENT_COMPONENT_H
 
 #include <map>
@@ -8,8 +8,18 @@
 
 namespace dexel {
 
+	/**
+	 * \brief Komponent parsera obsługujący przypisanie wartości do zmiennej.
+	 *
+	 * Klasa służąca do parsowania i generowania kodu odpowiadającego za przypisanie wartości do zmiennej.
+	 */
 	class VariableAssignmentComponent : public SyntaxComponent {
 
+		/**
+		 * \brief Wynik konwersji wartości numerycznej.
+		 *
+		 * Struktura wspomagająca generowanie kodu przypisywania wartości zmiennej w języku MCFunction.
+		 */
 		struct NumericValueConversionResult {
 			string code;
 			string outcomeScoreLocation;
@@ -31,7 +41,23 @@ namespace dexel {
 		void readComponent() override;
 		string convertToMCFunctionCode(const string& functionNamePrefix) override;
 
+		/**
+		 * \brief Funkcja sprawdzająca strukturę przypisania wartości numerycznej.
+		 *
+		 * Funkcja wspomagająca proces parsowania kodu przypisania wartości numerycznej poprzez sprawdzenie poprawności struktury wyrażenia numerycznego.
+		 * 
+		 * \return Czy struktura jest poprawna.
+		 */
 		bool isAssignmentExpressionValid();
+
+		/**
+		 * \brief Funkcja parsująca kod przypisania wartości numerycznej.
+		 *
+		 * Funkcja parsująca kod przypisania wartości numerycznej poprzez zamianę tokenów kodu utworzenia wartości numerycznej na drzewiastą strukturę operacji numerycznych.
+		 *
+		 * \param startingTokenIndex - Indeks pierwszego tokena rozpatrywanego w danym wywołaniu.
+		 * \return Wyrażenie numeryczne (wyrażona w drzewiastej strukturze wartości numerycznych).
+		 */
 		shared_ptr<NumericValue> parseNumericValue(int& startingTokenIndex);
 
 	private:

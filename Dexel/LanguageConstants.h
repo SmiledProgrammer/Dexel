@@ -1,4 +1,4 @@
-#ifndef LANGUAGE_CONSTANTS_H
+﻿#ifndef LANGUAGE_CONSTANTS_H
 #define LANGUAGE_CONSTANTS_H
 
 #include <map>
@@ -8,9 +8,19 @@
 
 namespace dexel {
 
+	/**
+	 * \brief Stałe generowania paczek zasobów.
+	 *
+	 * Stałe wartości tekstowe służące do wygenerowania i nawigacji po właściwych folderach paczek zasobów.
+	 */
 	const string DEXEL_DATAPACK_NAMESPACE = "dexel";
 	const string DEXEL_DATAPACK_NAME = "DexelDatapack";
 
+	/**
+	 * \brief Stałe analizy leksykalnej.
+	 *
+	 * Stałe do rozpoznawania rodzajów tokenów języka Dexel.
+	 */
 	const map<char, Token::Type> SYMBOL_TOKENS{
 		{'=', Token::TYPE_EQUALS_OPERATOR},
 		{'+', Token::TYPE_PLUS_OPERATOR},

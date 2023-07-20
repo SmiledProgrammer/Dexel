@@ -1,10 +1,15 @@
-#ifndef DEXEL_FILE_SYNTAX_COMPONENT_H
+﻿#ifndef DEXEL_FILE_SYNTAX_COMPONENT_H
 #define DEXEL_FILE_SYNTAX_COMPONENT_H
 
 #include "FunctionDefinitionComponent.h"
 
 namespace dexel {
 
+	/**
+	 * \brief Komponent parsera obsługujący plik języka Dexel.
+	 *
+	 * Klasa służąca do parsowania i generowania kodu danego pliku źródłowego w języku Dexel.
+	 */
 	class DexelFileSyntaxComponent : public SyntaxComponent {
 
 		string m_filepath;

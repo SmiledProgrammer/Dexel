@@ -8,6 +8,11 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa testów tekstowych funkcji pomocniczych.
+	 *
+	 * Klasa testowa do przeprowadzania testów tekstowych funkcji pomocniczych.
+	 */
 	class StringUtilsTest {
 	public:
 		struct TestCase {

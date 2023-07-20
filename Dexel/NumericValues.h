@@ -1,4 +1,4 @@
-#ifndef NUMERIC_VALUES_H
+﻿#ifndef NUMERIC_VALUES_H
 #define NUMERIC_VALUES_H
 
 #include <string>
@@ -7,6 +7,12 @@
 using namespace std;
 
 namespace dexel {
+
+	/**
+	 * \brief Zestaw struktur wartości numerycznych.
+	 *
+	 * Zestaw prostych struktur wspomagających komponent przypisywania wartości zmiennej (klasa VariableAssignmentComponent).
+	 */
 
 	enum NumericOperator {
 		NONE,

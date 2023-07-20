@@ -1,4 +1,4 @@
-#ifndef LEXER_H
+﻿#ifndef LEXER_H
 #define LEXER_H
 
 #include <string>
@@ -9,6 +9,11 @@ using namespace std;
 
 namespace dexel {
 
+	/**
+	 * \brief Klasa analizy składniowej.
+	 *
+	 * Klasa służąca do przeprowadzania analizy składniowej kodu języka Dexel.
+	 */
 	class Lexer {
 	
 		string m_code;
@@ -21,6 +26,13 @@ namespace dexel {
 	public:
 		Lexer(const string& code, const string& sourceCodeFilepath);
 
+		/**
+		 * \brief Funkcja analizy składniowej.
+		 *
+		 * Funkcja służąca do przeprowadzenia analizy składniowej.
+		 *
+		 * \return Lista tokenów języka Dexel.
+		 */
 		vector<Token> tokenize();
 
 	private:

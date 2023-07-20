@@ -12,10 +12,3 @@ string removeNewlines(const string& str) {
 	}
 	return result;
 }
-
-string cutDexelExtensionFromFilepath(const string& str) {
-	if (str.ends_with(".dexel")) {
-		return str.substr(0, str.length() - 6);
-	}
-	return str;
-}

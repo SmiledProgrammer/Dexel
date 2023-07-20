@@ -21,7 +21,9 @@ void runTests() {
 }
 
 int main(int argc, char** argv) {
-	//runTests();
+#ifdef RUN_TESTS
+	runTests();
+#endif
 
 	Transpiler transpiler = Transpiler();
 	transpiler.parseArguments(argc, argv);
