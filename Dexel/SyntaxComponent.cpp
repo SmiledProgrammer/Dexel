@@ -97,7 +97,7 @@ shared_ptr<SyntaxComponent> SyntaxComponent::createComponentFromNextToken() {
 	throw createException("Cannot parse code structure.");
 }
 
-ParsingException SyntaxComponent::createException(const string& message) {
+ParsingException<string> SyntaxComponent::createException(const string& message) {
 	Token currentToken = m_tokens[m_index];
 	return ParsingException(message, currentToken.getFilepath(), currentToken.getLine(), currentToken.getColumn());
 }

@@ -37,6 +37,7 @@ namespace dexel {
 
 	public:
 		VariableAssignmentComponent(vector<Token>& tokens, int index);
+		VariableAssignmentComponent(vector<Token>& tokens, int index, bool readComponentOnConstruction);
 
 		void readComponent() override;
 		string convertToMCFunctionCode(const string& functionNamePrefix) override;

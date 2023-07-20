@@ -31,7 +31,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NumericValuesTest.cpp" />
     <ClCompile Include="Parser.cpp" />
-    <ClCompile Include="ParsingException.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="StringUtilsTest.cpp" />
     <ClCompile Include="SyntaxComponent.cpp" />

@@ -48,14 +48,14 @@ int NumericValuesTest::runTests() {
 		vector<Token> tokens = lexer.tokenize();
 		int startingIndex = 0;
 		try {
-			VariableAssignmentComponent component(tokens, startingIndex);
+			VariableAssignmentComponent component(tokens, startingIndex, false);
 			shared_ptr<NumericValue> actualNumericValue = component.parseNumericValue(startingIndex);
 			string actualString = numericValueToNumericExpressionString(actualNumericValue);
 			if (testCase.expectedNumericExpressionString != actualString) {
 				displayFailInfo(testCase.expectedNumericExpressionString, actualString);
 				failedTestsCount++;
 			}
-		} catch (ParsingException ex) {
+		} catch (ParsingException<string> ex) {
 			string actualString = "Exception: " + ex.getMessage();
 			displayFailInfo(testCase.expectedNumericExpressionString, actualString);
 			failedTestsCount++;

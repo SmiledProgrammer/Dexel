@@ -24,6 +24,13 @@ VariableAssignmentComponent::VariableAssignmentComponent(vector<Token>& tokens, 
 	readComponent();
 }
 
+VariableAssignmentComponent::VariableAssignmentComponent(vector<Token>& tokens, int index, bool readComponentOnConstruction)
+	: SyntaxComponent(tokens, index) {
+	if (readComponentOnConstruction) {
+		readComponent();
+	}
+}
+
 void VariableAssignmentComponent::readComponent() {
 	int variableNameIndex = m_index + 1;
 	checkNextTokensTypes(m_startingPattern);
